@@ -1,0 +1,34 @@
+button {
+	all: unset;
+}
+
+.theme-switcher {
+	height: 50px;
+	padding: 0 0.4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& button {
+		width: 40px;
+		height: 25px;
+		border-radius: 9999px;
+		position: relative;
+		border: solid 1px currentColor;
+
+		& span {
+			display: block;
+			width: 20px;
+			height: 20px;
+			border-radius: 9999px;
+			transition: transform 100ms;
+			transform: translateX(4px);
+			will-change: transform;
+			background-color: currentColor;
+
+			&[data-state='checked'] {
+				transform: translateX(15px);
+			}
+		}
+	}
+}

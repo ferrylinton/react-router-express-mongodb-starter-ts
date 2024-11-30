@@ -1,17 +1,26 @@
+import { useTranslation } from "react-i18next";
+import { data } from "react-router";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export function loader({ context }: Route.LoaderArgs) {
-  return { message: context.VALUE_FROM_EXPRESS };
+export async function loader({ context, request }: Route.LoaderArgs) {
+  
+
+  return data(
+    { message: "hello" }
+  );
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  return <Welcome message={loaderData.message} />;
+  let { t, i18n } = useTranslation();
+
+  return (<>
+    <h1>{t("home")}</h1>
+  </>);
 }

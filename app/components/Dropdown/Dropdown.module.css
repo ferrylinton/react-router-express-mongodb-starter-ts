@@ -1,0 +1,96 @@
+.dropdown-menu-trigger {
+	display: flex;
+	height: 50px;
+	width: 50px;
+	padding: 0 5px;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+
+	& svg {
+		height: 20px;
+		width: auto;
+	}
+
+	&[data-state='open'] {
+		background-color: var(--base-95);
+	}
+}
+
+.dropdown-menu-content {
+	min-width: 220px;
+	border-radius: 6px;
+	padding: 0.5rem 0.5rem;
+	animation-duration: 400ms;
+	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform, opacity;
+	animation-name: slideUpAndFade;
+	backdrop-filter: blur(10px);
+	border: solid 1px var(--base-75);
+	background-color: var(--base);
+	box-shadow:
+		var(--base-90) 0px 30px 60px -12px,
+		var(--base-70) 0px 18px 36px -18px;
+
+	& svg {
+		height: 20px;
+		width: auto;
+	}
+
+	& [role='separator'] {
+		height: 1px;
+		margin: 5px;
+		background-color: var(--base-80);
+	}
+
+	& [role='menuitemradio'],
+	& [role='menuitem'] {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		line-height: 1;
+		border: none;
+		border-radius: 3px;
+		height: 2.2rem;
+		font-size: 0.9rem;
+		padding: 0.5rem;
+		position: relative;
+		padding-left: 25px;
+		user-select: none;
+		outline: none;
+		text-transform: uppercase;
+		color: var(--base-40);
+
+		&:hover {
+			color: var(--base-10);
+			background-color: var(--base-80);
+		}
+
+		& span:first-child {
+			position: absolute;
+			left: 0;
+			width: 25px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--base-60);
+
+			& svg {
+				width: 10px;
+				height: 10px;
+			}
+		}
+	}
+}
+
+@keyframes slideUpAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

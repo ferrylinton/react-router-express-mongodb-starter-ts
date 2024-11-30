@@ -10,6 +10,7 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   }
 }

@@ -1,0 +1,62 @@
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	padding: 0.5rem;
+	border-radius: 0.2rem;
+	color: var(--inverse-text);
+}
+
+.btn-primary {
+	color: hsl(var(--primary-h), var(--primary-s), 90%);
+	background-color: var(--primary);
+	box-shadow: var(--primary) 0 5px 10px -5px;
+}
+
+.btn-primary:hover {
+	color: var(--inverse-text);
+	background-color: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 10%));
+}
+
+.btn-secondary {
+	background-color: var(--base-70);
+	box-shadow: var(--base-70) 0 5px 10px -5px;
+}
+
+.btn-secondary:hover {
+	background-color: var(--base-60);
+}
+
+.btn-danger {
+	color: hsl(var(--danger-h), var(--danger-s), 90%);
+	background-color: var(--danger);
+	box-shadow: var(--danger) 0 5px 10px -5px;
+}
+
+.btn-danger:hover {
+	color: var(--inverse-text);
+	background-color: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 10%));
+}
+
+.btn svg {
+	width: 20px;
+	height: 20px;
+}
+
+.btn-big {
+	height: 45px;
+	font-size: 1.1rem;
+}
+
+.btn-small {
+	font-size: 0.9rem;
+	padding: 0.5rem 0;
+
+	& svg {
+		width: 18px;
+		height: auto;
+	}
+}

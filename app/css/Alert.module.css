@@ -1,0 +1,21 @@
+.alert-danger {
+	width: 100%;
+	max-width: 400px;
+	color: hsl(var(--danger-h), var(--danger-s), 30%);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.6rem;
+
+	& svg {
+		width: 100px;
+		height: 100px;
+	}
+
+	& p {
+		font-size: 1rem;
+		padding: 0.5rem 1rem;
+	}
+}

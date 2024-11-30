@@ -5,8 +5,8 @@
     "composite": true,
     "strict": true,
     "types": ["node"],
-    "lib": ["ES2022"],
-    "target": "ES2022",
+    "lib": ["ESNext"],
+    "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext"
   }

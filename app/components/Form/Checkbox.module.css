@@ -1,0 +1,28 @@
+.checkbox {
+	display: flex;
+	gap: 0.5rem;
+
+	& button {
+		width: 25px;
+		height: 25px;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: solid 1px var(--base-75);
+
+		& svg {
+			width: 18px;
+			height: 18px;
+			fill: var(--base-40);
+		}
+	}
+
+	& button[data-error='true'] {
+		border: solid 1px var(--danger);
+
+		& svg {
+			fill: var(--danger);
+		}
+	}
+}

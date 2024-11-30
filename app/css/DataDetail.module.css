@@ -1,0 +1,39 @@
+.data-detail {
+	width: 100%;
+	background-color: var(--base);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	border: solid 1px var(--base-90);
+
+	& table {
+		width: 100%;
+
+		& tr:not(:last-child) {
+			& th,
+			& td {
+				border-bottom: solid 1px var(--base-80);
+			}
+		}
+
+		& th,
+		& td {
+			font-size: 0.9rem;
+			padding: 0.5rem;
+		}
+
+		& th {
+			text-align: right;
+			background-color: var(--base-90);
+		}
+	}
+}
+
+@media (min-width: 640px) {
+	.data-detail {
+		& table {
+			& th {
+				width: 160px;
+			}
+		}
+	}
+}

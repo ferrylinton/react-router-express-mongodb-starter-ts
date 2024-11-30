@@ -1,0 +1,19 @@
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+	border-top: 6px solid currentColor;
+	border-bottom: 0;
+}
+
+.triangle-up {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+	border-bottom: 6px solid currentColor;
+	border-top: 0;
+}
