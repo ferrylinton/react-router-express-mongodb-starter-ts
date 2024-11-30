@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "webpack": "webpack --config ./webpack.config.server.cjs --mode=production",
-    "build": "react-router build",
+    "build-webpack": "webpack --config ./webpack.config.server.cjs --mode=production",
+    "build-react": "react-router build",
+    "build": "npm run build-react && npm run build-webpack",
     "dev": "cross-env NODE_ENV=development tsx ./express/server.dev.ts",
-    "start": "cross-env NODE_ENV=production node --enable-source-maps ./build/server.js",
-    "start2": "cross-env NODE_ENV=production node --enable-source-maps server.js",
+    "start": "cd build && cross-env NODE_ENV=production node --enable-source-maps ./server.cjs",
     "typecheck": "react-router typegen && tsc --build --noEmit"
   },
   "dependencies": {
