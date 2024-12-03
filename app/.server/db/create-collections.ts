@@ -1,6 +1,6 @@
-import { MONGODB_DATABASE } from '../config/constant';
-import { getMongoClient } from '../config/mongodb';
-import logger from '../config/winston';
+import { MONGODB_DATABASE } from '~/.server/config/constant';
+import { getMongoClient } from '~/.server/config/mongodb';
+import logger from '~/.server/config/winston';
 import {
 	PASSWORD_TOKEN_COLLECTION,
 	RATE_LIMIT_COLLECTION,

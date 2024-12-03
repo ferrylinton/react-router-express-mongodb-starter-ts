@@ -1,54 +1,34 @@
-import React, { useState } from 'react';
-import type { Route } from "./+types/home";
-import { useAppContext } from '~/providers/AppProvider';
-import { data, Form, Link, Navigate, useActionData, useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuthenticateSchema } from '~/validations/authenticate-schema';
+import { data, Form, Link, LoaderFunctionArgs, Navigate, redirect, useActionData } from 'react-router';
+import { generateToken } from '~/.server/services/auth-service';
+import { commitSession, getUserSession } from '~/.server/utils/sessions';
 import { Button } from '~/components/Button/Button';
 import { InputForm } from '~/components/Form/InputForm';
 import { getLoggedUser } from '~/utils/cookie-util';
+import { AuthenticateSchema } from '~/validations/authenticate-schema';
 import { getErrorsObject } from '~/validations/validation-util';
+import type { Route } from "./+types/home";
 
-
+type ActionData = {
+    errorMessage?: string
+    error?: ValidationError
+}
 
 export default function Login() {
     const { t } = useTranslation();
 
-    const data = useActionData<typeof action>();
-
-    const navigate = useNavigate();
-
-    const [validationError, setValidationError] = useState<ValidationError | null>(null);
+    const actionData = useActionData<ActionData>();
 
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const { login } = useAppContext();
+    const [validationError, setValidationError] = useState<ValidationError | null>(null);
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setErrorMessage(null);
-        setValidationError(null);
-
-        const formData = new FormData(event.currentTarget);
-        const payload = Object.fromEntries(formData.entries());
-        const validation = AuthenticateSchema.safeParse(payload);
-
-        if (validation.success) {
-            try {
-                console.log(validation.data);
-                //const { data } = await axiosInstance.post<LoggedUser>(`/api/token`, payload);
-                //login(data);
-            } catch (error: any) {
-                if (error.response.data) {
-                    setErrorMessage(t(error.response.data.message));
-                } else {
-                    setErrorMessage(error.message);
-                }
-            }
-        } else {
-            setValidationError(getErrorsObject(validation.error));
+    useEffect(() => {
+        if (actionData?.error) {
+            setValidationError(actionData.error)
         }
-    };
+    }, [actionData]);
 
     if (getLoggedUser()) {
         return <Navigate replace to="/" />;
@@ -69,14 +49,14 @@ export default function Login() {
                         type="text"
                         maxLength={20}
                         name="username"
-                        validationError={data?.error}
+                        validationError={validationError}
                     />
 
                     <InputForm
                         type="password"
                         maxLength={30}
                         name="password"
-                        validationError={data?.error}
+                        validationError={validationError}
                     />
 
                     <Button type="submit" variant="primary" size="big">
@@ -97,12 +77,45 @@ export default function Login() {
     );
 }
 
+export async function loader({ request }: LoaderFunctionArgs) {
+    const session = await getUserSession(request);
+
+    if (session.has('loggedUser')) {
+        return redirect("/");
+    }
+}
+
 export async function action({ request }: Route.ActionArgs) {
     const payload = Object.fromEntries(await request.formData());
     const validation = AuthenticateSchema.safeParse(payload);
 
+    const session = await getUserSession(request);
+
     if (validation.success) {
         console.log(validation.data);
+        const { username, password } = validation.data;
+        const loggedUser = await generateToken(username, password);
+
+
+        if (loggedUser == null) {
+            session.flash("error", "Invalid username/password");
+
+            // Redirect back to the login page with errors.
+            return redirect("/login", {
+                headers: {
+                    "Set-Cookie": await commitSession(session),
+                },
+            });
+        }
+
+        session.set("loggedUser", loggedUser);
+
+        // Login succeeded, send them to the home page.
+        return redirect("/", {
+            headers: {
+                "Set-Cookie": await commitSession(session),
+            },
+        });
     } else {
         return data({ error: getErrorsObject(validation.error) });
     }

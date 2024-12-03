@@ -1,6 +1,8 @@
 import "react-router";
 import { createRequestHandler } from "@react-router/express";
 import express from "express";
+import { authMiddleware } from "./middlewares/auth-middleware";
+import bodyParser from "body-parser";
 
 declare module "react-router" {
   interface AppLoadContext {
@@ -9,6 +11,11 @@ declare module "react-router" {
 }
 
 export const app = express();
+
+//app.use(bodyParser.json()); // support json encoded bodies
+//app.use(express.urlencoded({ extended: true })); // support encoded bodies
+
+app.use(authMiddleware);
 
 app.use(
   createRequestHandler({

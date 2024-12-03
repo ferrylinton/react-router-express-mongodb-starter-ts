@@ -36,6 +36,7 @@
 		gap: 0.4rem;
 
 		& button {
+			box-sizing: border-box;
 			flex: 0 0 50%;
 		}
 	}

@@ -1,0 +1,30 @@
+.tooltip-content {
+	border-radius: 4px;
+	padding: 10px 15px;
+	font-size: 15px;
+	line-height: 1;
+	user-select: none;
+	animation-duration: 400ms;
+	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform, opacity;
+	background-color: var(--base);
+	border: solid 1px var(--base-70);
+	box-shadow: hsla(var(--base-h), var(--base-s), var(--base-l), 0.5) 0px 0px 10px;
+}
+
+.tooltip-content[data-state='delayed-open'][data-side='top'] {
+	animation-name: slideDownAndFade;
+}
+.tooltip-content[data-state='delayed-open'][data-side='right'] {
+	animation-name: slideLeftAndFade;
+}
+.tooltip-content[data-state='delayed-open'][data-side='bottom'] {
+	animation-name: slideUpAndFade;
+}
+.tooltip-content[data-state='delayed-open'][data-side='left'] {
+	animation-name: slideRightAndFade;
+}
+
+.tooltip-arrow {
+	fill: var(--base-60);
+}

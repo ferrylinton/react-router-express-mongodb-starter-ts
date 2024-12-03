@@ -3,22 +3,31 @@ import autoprefixer from "autoprefixer";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { envOnlyMacros } from "vite-env-only"
 
-export default defineConfig(({ isSsrBuild }) => ({
-  build: {
-    rollupOptions: isSsrBuild
-      ? {
-        input: "./server/app.ts",
-      }
-      : undefined,
-  },
-  css: {
-    postcss: {
-      plugins: [tailwindcss, autoprefixer],
+export default defineConfig((config) => {
+  return {
+    esbuild: {
+      supported: {
+        'top-level-await': true //browsers can handle top-level-await features
+      },
     },
-  },
-  plugins: [
-    reactRouter(), 
-    tsconfigPaths()
-  ],
-}));
+    build: {
+      rollupOptions: config.isSsrBuild
+        ? {
+          input: "./server/server.ts"
+        }
+        : undefined,
+    },
+    css: {
+      postcss: {
+        plugins: [tailwindcss, autoprefixer],
+      },
+    },
+    plugins: [
+      reactRouter(),
+      tsconfigPaths(),
+      envOnlyMacros()
+    ],
+  }
+});

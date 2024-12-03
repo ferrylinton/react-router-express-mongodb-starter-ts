@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import { getSort, PAGE_SIZE } from '../utils/pager-util';
 import logger from '../config/winston';
 
-export const find = async ({ page, column, keyword, sort }: RequestParams) => {
+export const findUserList = async ({ page, column, keyword, sort }: RequestParams) => {
 	sort = sort || 'createdAt,desc';
 	console.log({ page, column, keyword, sort });
 	const userCollection = await getCollection<User>(USER_COLLECTION);

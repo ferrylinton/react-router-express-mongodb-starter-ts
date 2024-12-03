@@ -1,0 +1,133 @@
+.dot-menu {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+}
+
+.table-pop-menu {
+	--shadow-color: hsla(var(--base-h), var(--base-s), 8%, 0.1);
+	position: relative;
+	border-radius: 4px;
+	padding: 15px 15px 15px 15px;
+	user-select: none;
+	animation-duration: 400ms;
+	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: transform, opacity;
+	background-color: var(--base);
+	border: solid 1px var(--base-70);
+	box-shadow:
+		var(--shadow-color) 0px 8px 24px,
+		var(--shadow-color) 0px 16px 56px,
+		var(--shadow-color) 0px 24px 80px;
+
+	& section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		min-width: 120px;
+
+		& button,
+		& a {
+			padding: 4px 6px;
+			line-height: 1;
+			border-radius: 4px;
+			color: var(--base-40);
+
+			&:hover {
+				color: var(--text);
+			}
+		}
+	}
+}
+
+.table-pop-menu[data-state='open'][data-side='top'] {
+	animation-name: slideDownAndFade;
+}
+
+.table-pop-menu[data-state='open'][data-side='right'] {
+	animation-name: slideLeftAndFade;
+}
+
+.table-pop-menu[data-state='open'][data-side='bottom'] {
+	animation-name: slideUpAndFade;
+}
+
+.table-pop-menu[data-state='open'][data-side='left'] {
+	animation-name: slideRightAndFade;
+}
+
+.popover-arrow {
+	width: 15px;
+	height: 10px;
+	fill: var(--base-70);
+}
+
+.popover-close {
+	font-family: inherit;
+	border-radius: 100%;
+	height: 12px;
+	width: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	color: var(--base-60);
+}
+
+.popover-close:hover {
+	background-color: var(--violet-4);
+}
+
+.popover-close:focus {
+	box-shadow: 0 0 0 2px var(--violet-7);
+}
+
+@keyframes slideUpAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideRightAndFade {
+	from {
+		opacity: 0;
+		transform: translateX(-2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideDownAndFade {
+	from {
+		opacity: 0;
+		transform: translateY(-2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideLeftAndFade {
+	from {
+		opacity: 0;
+		transform: translateX(2px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

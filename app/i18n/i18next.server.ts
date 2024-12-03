@@ -1,9 +1,8 @@
+import * as cookie from 'cookie';
 import Backend from "i18next-fs-backend/cjs";
 import { resolve } from "node:path";
 import { RemixI18Next } from "remix-i18next/server";
-import i18n from "~/i18n/i18n"; // your i18n configuration file
-import { localeCookie } from "../utils/cookies.server";
-import * as cookie from 'cookie';
+import i18n from "~/i18n/i18n";
 
 let i18next = new RemixI18Next({
   detection: {
@@ -11,9 +10,7 @@ let i18next = new RemixI18Next({
     fallbackLanguage: i18n.fallbackLng,
     async findLocale(request) {
       const cookies = cookie.parse(request.headers.get("Cookie") || "");
-      console.log(request.headers.get("Cookie"));
-      console.log(cookies);
-      return cookies.locale || "en";
+      return cookies.locale || i18n.fallbackLng;
     },
   },
   // This is the configuration for i18next used

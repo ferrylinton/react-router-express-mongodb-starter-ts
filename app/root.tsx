@@ -12,11 +12,10 @@ import {
 import type { Route } from "./+types/root";
 import stylesheet from "./css/index.css?url";
 
-import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
+import { useChangeLanguage } from "remix-i18next/react";
 
 import i18next from "./i18n/i18next.server";
-import { localeCookie } from "./utils/cookies.server";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -27,14 +26,17 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap",
   },
   { rel: "stylesheet", href: stylesheet },
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const locale = await i18next.getLocale(request);
-
   return data({ locale });
 }
 
@@ -49,9 +51,10 @@ export let handle = {
 export function Layout({ children }: { children: React.ReactNode }) {
 
   // Get the locale from the loader
-  let { locale } = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader | undefined>();
+  const locale = loaderData?.locale || "id";
 
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   // This hook will change the i18n instance language to the current locale
   // detected by the loader, this way, when we do something to change the

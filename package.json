@@ -3,14 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build-webpack": "webpack --config ./webpack.config.server.cjs --mode=production",
-    "build-react": "react-router build",
-    "build": "npm run build-react && npm run build-webpack",
-    "dev": "cross-env NODE_ENV=development tsx ./express/server.dev.ts",
-    "start": "cd build && cross-env NODE_ENV=production node --enable-source-maps ./server.cjs",
+    "build": "react-router build",
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "start": "cross-env NODE_ENV=production node ./build/server/index.js",
     "typecheck": "react-router typegen && tsc --build --noEmit"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-collapsible": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
@@ -22,6 +21,7 @@
     "@react-router/express": "^7.0.1",
     "@react-router/node": "^7.0.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
     "clsx": "^2.1.1",
     "compression": "^1.7.5",
     "cookie": "^1.0.2",
@@ -54,6 +54,7 @@
     "@types/express": "^5.0.0",
     "@types/express-serve-static-core": "^5.0.1",
     "@types/js-cookie": "^3.0.6",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
@@ -61,14 +62,13 @@
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
+    "nodemon": "^3.1.7",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
-    "ts-loader": "^9.5.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
-    "vite-tsconfig-paths": "^5.1.2",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "vite-env-only": "^3.0.3",
+    "vite-tsconfig-paths": "^5.1.2"
   }
 }

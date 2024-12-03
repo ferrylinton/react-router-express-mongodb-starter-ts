@@ -17,8 +17,6 @@ export const LanguageMenu = () => {
 
 	const onLanguageChange = (value: string) => {
 		i18n.changeLanguage(value);
-		console.log("xxxxxxxxxxxxxxxxxxxxx");
-		console.log(Cookies.get("locale"));
 		Cookies.set("locale", value);
 	}
 
