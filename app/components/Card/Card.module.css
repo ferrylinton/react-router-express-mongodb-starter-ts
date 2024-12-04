@@ -1,0 +1,19 @@
+.card {
+	--border-color: var(--base-90);
+	border: solid 1px var(--border-color);
+	background-color: var(--base);
+	border-radius: 0.3rem;
+
+	& .card-header {
+		height: 40px;
+		line-height: 40px;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		padding: 0 1rem;
+		border-bottom: solid 1px var(--border-color);
+	}
+
+	& .card-content {
+		padding: 1rem;
+	}
+}

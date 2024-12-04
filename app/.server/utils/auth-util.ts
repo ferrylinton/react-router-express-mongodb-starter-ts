@@ -5,7 +5,7 @@ export async function authenticate(request: Request, returnTo?: string) {
     const session = await getUserSession(request);
     const loggedUser = session.get("loggedUser");
 
-    if (loggedUser) return loggedUser;
+    if (loggedUser && loggedUser.id && loggedUser.username) return loggedUser;
     if (returnTo) session.set("returnTo", returnTo);
 
     throw redirect("/login", {

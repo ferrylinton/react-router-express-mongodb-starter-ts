@@ -27,8 +27,8 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 		navigate(`/user/detail/${id}`);
 	};
 
-	const toModify = (id: string) => {
-		navigate(`/user/modify/${id}`);
+	const toUpdate = (id: string) => {
+		navigate(`/user/update/${id}`);
 	};
 
 	const toPassword = (id: string) => {
@@ -119,7 +119,7 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 										<td>
 											<UserPopMenu
 												locked={user.locked}
-												toModify={() => toModify(user.id)}
+												toUpdate={() => toUpdate(user.id)}
 												toDetail={() => toDetail(user.id)}
 												toPassword={() => toPassword(user.id)}
 												toggleLockUser={() => toggleLockUser(user)}

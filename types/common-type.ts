@@ -37,3 +37,10 @@ type PaginationProps = {
 type KeyValue = {
 	[key: string]: string;
 };
+
+type ErrorData = {
+	message?: string
+	arg?: string
+}
+
+type ToastMessage = { message: string; type: "success" | "error" }

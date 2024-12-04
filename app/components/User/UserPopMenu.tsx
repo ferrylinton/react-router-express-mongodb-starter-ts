@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 type Props = {
 	locked: boolean;
 	toDetail: () => void;
-	toModify: () => void;
+	toUpdate: () => void;
 	toPassword: () => void;
 	toggleLockUser: () => void;
 };
 
-export const UserPopMenu = ({ locked, toDetail, toModify, toPassword, toggleLockUser }: Props) => {
+export const UserPopMenu = ({ locked, toDetail, toUpdate, toPassword, toggleLockUser }: Props) => {
 
 	const { t } = useTranslation();
 
@@ -37,7 +37,7 @@ export const UserPopMenu = ({ locked, toDetail, toModify, toPassword, toggleLock
 						<button onClick={() => toDetail()}>
 							{t("detail")}
 						</button>
-						<button onClick={() => toModify()}>
+						<button onClick={() => toUpdate()}>
 							{t("modify")}
 						</button>
 						<button onClick={() => toPassword()}>

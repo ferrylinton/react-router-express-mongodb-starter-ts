@@ -36,3 +36,9 @@ type ChangePassword = {
 	updatedBy: string;
 	updatedAt: Date;
 };
+
+type UserFormProps = {
+	user?: Omit<User, 'password'>
+	errorMessage?: string
+    validationError?: ValidationError
+};

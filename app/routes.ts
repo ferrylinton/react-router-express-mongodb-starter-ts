@@ -15,7 +15,7 @@ export default [
             route("/create", "routes/user/create.tsx"),
             route("/detail/:id", "routes/user/detail.tsx"),
             route("/update/:id", "routes/user/update.tsx"),
-            route("/update/:id", "routes/user/password.tsx")
+            route("/password/:id", "routes/user/password.tsx")
         ]),
     ]),
 

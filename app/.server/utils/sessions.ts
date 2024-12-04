@@ -7,7 +7,8 @@ type SessionData = {
 };
 
 type SessionFlashData = {
-    error: string;
+    data?: KeyValue
+    toastMessage? : ToastMessage
 };
 
 const sessionStorage =

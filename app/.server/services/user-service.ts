@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import { getSort, PAGE_SIZE } from '../utils/pager-util';
 import logger from '../config/winston';
 
-export const findUserList = async ({ page, column, keyword, sort }: RequestParams) => {
+export const findUsers = async ({ page, column, keyword, sort }: RequestParams) => {
 	sort = sort || 'createdAt,desc';
 	console.log({ page, column, keyword, sort });
 	const userCollection = await getCollection<User>(USER_COLLECTION);
@@ -118,25 +118,25 @@ export const findUserList = async ({ page, column, keyword, sort }: RequestParam
  * @param {string} id - The ID of user document
  * @returns A {@link User} document
  */
-export const findById = async (id: string) => {
+export const findUserById = async (id: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	const user = await userCollection.findOne({ _id: new ObjectId(id) });
 	return user ? mapToObject(user) : null;
 };
 
-export const findByUsername = async (username: string) => {
+export const findUserByUsername = async (username: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	const user = await userCollection.findOne({ username });
 	return user ? mapToObject(user) : null;
 };
 
-export const findByEmail = async (email: string) => {
+export const findUserByEmail = async (email: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	const user = await userCollection.findOne({ email });
 	return user ? mapToObject(user) : null;
 };
 
-export const create = async (createUser: CreateUser, createdBy?: string) => {
+export const createUser = async (createUser: CreateUser, createdBy?: string) => {
 	createUser.password = bcrypt.hashSync(createUser.password, 10);
 	const user: Omit<User, 'id'> = {
 		...createUser,
@@ -154,12 +154,12 @@ export const changePassword = async (input: ChangePassword) => {
 	return await userCollection.updateOne({ username: input.username }, { $set: input });
 };
 
-export const update = async ({ id, ...input }: Partial<UpdateUser>) => {
+export const updateUser = async ({ id, ...input }: Partial<UpdateUser>) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 	return await userCollection.updateOne({ _id: new ObjectId(id) }, { $set: input });
 };
 
-export const deleteById = async (_id: string) => {
+export const deleteUserById = async (id: string) => {
 	const userCollection = await getCollection<User>(USER_COLLECTION);
-	return await userCollection.deleteOne({ _id: new ObjectId(_id) });
+	return await userCollection.deleteOne({ _id: new ObjectId(id) });
 };

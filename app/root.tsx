@@ -16,6 +16,8 @@ import { useTranslation } from "react-i18next";
 import { useChangeLanguage } from "remix-i18next/react";
 
 import i18next from "./i18n/i18next.server";
+import { ToastProvider } from "./providers/ToastProvider";
+
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -80,7 +82,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return <>
+    <ToastProvider>
+      <Outlet />
+    </ToastProvider>
+  </>;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
