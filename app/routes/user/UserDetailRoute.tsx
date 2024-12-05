@@ -5,13 +5,11 @@ import { UserDetail } from '~/components/User/UserDetail';
 
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-    console.log("loaderrrrrrrrrrrrrrrrrrrrrrr");
     const user = await findUserById(params.id || "0")
     return data(user);
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-    console.log("actionnnnnnnnnnnnnnnnnnnnnnnnnnnn");
     const formData = await request.formData();
     const username = formData.get("username")?.valueOf() || "";
 
@@ -29,13 +27,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
 }
 
-export default function UserDetailPage() {
+export default function UserDetailRoute() {
 
     const user = useLoaderData<typeof loader>();
 
     const deleteResult = useActionData<KeyValue>();
-
-    console.log(deleteResult);
 
     return (
         <UserDetail user={user} />

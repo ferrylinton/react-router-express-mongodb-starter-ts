@@ -17,6 +17,7 @@ import { useChangeLanguage } from "remix-i18next/react";
 
 import i18next from "./i18n/i18next.server";
 import { ToastProvider } from "./providers/ToastProvider";
+import { commitSession, getUserSession } from "./.server/utils/sessions";
 
 
 export const links: Route.LinksFunction = () => [
@@ -39,6 +40,17 @@ export const links: Route.LinksFunction = () => [
 
 export async function loader({ request }: Route.LoaderArgs) {
   const locale = await i18next.getLocale(request);
+  const session = await getUserSession(request);
+
+  const toastMessage = session.get("toastMessage") as ToastMessage;
+
+  if (toastMessage) {
+    return data(
+      { locale, toastMessage },
+      { headers: { "Set-Cookie": await commitSession(session) } },
+    );
+  }
+
   return data({ locale });
 }
 
@@ -82,6 +94,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  
   return <>
     <ToastProvider>
       <Outlet />

@@ -38,7 +38,7 @@ type ChangePassword = {
 };
 
 type UserFormProps = {
-	user?: Omit<User, 'password'>
+	user: Omit<User, 'password'>
 	errorMessage?: string
     validationError?: ValidationError
 };

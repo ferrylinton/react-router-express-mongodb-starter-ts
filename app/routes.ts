@@ -9,21 +9,25 @@ import {
 export default [
 
     layout("components/Layout/Layout.tsx", [
-        index("routes/home.tsx"),
+        index("routes/HomeRoute.tsx"),
         ...prefix("user", [
-            index("routes/user/list.tsx"),
-            route("/create", "routes/user/create.tsx"),
-            route("/detail/:id", "routes/user/detail.tsx"),
-            route("/update/:id", "routes/user/update.tsx"),
-            route("/password/:id", "routes/user/password.tsx")
+            index("routes/user/UserListRoute.tsx"),
+            route("/create", "routes/user/UserCreateRoute.tsx"),
+            route("/detail/:id", "routes/user/UserDetailRoute.tsx"),
+            route("/update/:id", "routes/user/UserUpdateRoute.tsx"),
+            route("/password/:id", "routes/user/UserPasswordRoute.tsx"),
+            route("/lock/:id", "routes/user/UserLockRoute.tsx")
         ]),
     ]),
 
     layout("components/Layout/PublicLayout.tsx", [
-        route("login", "routes/login.tsx")
+        route("login", "routes/LoginRoute.tsx"),
+        route("register", "routes/RegisterRoute.tsx"),
+        route("forgotpassword", "routes/ForgotPasswordRoute.tsx"),
+        route("resetpassword", "routes/ResetPasswordRoute.tsx")
     ]),
 
-    route("logout", "routes/logout.tsx")
+    route("logout", "routes/LogoutRoute.tsx")
 
 
 ] satisfies RouteConfig;

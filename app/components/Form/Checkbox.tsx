@@ -7,7 +7,7 @@ type CheckboxProps = {
 	name: string;
 	label: string;
 	checked: boolean;
-	validationError: ValidationError | null;
+	validationError: ValidationError | undefined;
 };
 
 export const Checkbox = ({ name, label, checked, validationError }: CheckboxProps) => {

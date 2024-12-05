@@ -1,21 +1,17 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useState } from 'react';
-import { useConfirmStore } from '../../hooks/confirm-store';
+import { useSubmit } from 'react-router';
 import { TriangleDown } from '~/icons/TriangleDown';
 import { TriangleUp } from '~/icons/TriangleUp';
 import { UserIcon } from '~/icons/UserIcon';
-import { useAppContext } from '../../providers/AppProvider';
+import { useConfirmStore } from '../../hooks/confirm-store';
 import styles from './Dropdown.module.css';
 
 export const ProfileMenu = () => {
+	const submit = useSubmit();
 	const [open, setOpen] = useState<boolean>(false);
 
-
-
 	const { showConfirm, hideConfirm } = useConfirmStore();
-
-	const { logout } = useAppContext();
-
 
 
 	const handleLink = (pathname: string) => {
@@ -24,11 +20,11 @@ export const ProfileMenu = () => {
 
 	const okHandler = async () => {
 		hideConfirm();
-		logout();
+		submit(null, { method: "post", action: "/logout" })
 	};
 
 	const onClickLogout = () => {
-		showConfirm("Logout ?", okHandler);
+		showConfirm("Logout?", okHandler);
 	};
 
 	return (

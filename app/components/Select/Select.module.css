@@ -8,6 +8,7 @@
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
 	border-bottom: solid 1px var(--base-75);
+	box-sizing: border-box;
 }
 
 .select-content {

@@ -6,7 +6,7 @@ import { Pager } from '../Pager/Pager';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { UserPopMenu } from './UserPopMenu';
 import { UserTableItem } from './UserTableItem';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSubmit } from 'react-router';
 
 type UserTableProps = {
 	pageable: Pageable<Omit<User, 'password'>>;
@@ -18,7 +18,7 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
-	const { toast } = useToastContext();
+	const submit = useSubmit();
 
 
 	const navigate = useNavigate();
@@ -37,12 +37,11 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 
 	const okHandler = async (user: Omit<User, 'password'>) => {
 		try {
-
-			toast(t('dataIsUpdated', { arg: user.username }));
-			hideConfirm();
-			navigate('/user', { replace: true });
+			if (user) {
+				submit({ username: user.username, locked: !user.locked }, { method: "post", action: `/user/lock/${user.id}` })
+				hideConfirm();
+			}
 		} catch (error: any) {
-			toast(error.message, true);
 			console.log(error);
 		}
 	};

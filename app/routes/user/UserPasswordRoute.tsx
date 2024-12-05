@@ -1,40 +1,42 @@
 import { useEffect, useState } from 'react';
 import { ActionFunctionArgs, data, LoaderFunctionArgs, useActionData, useLoaderData } from 'react-router';
-import { findUserById, updateUser } from '~/.server/services/user-service';
+import { changePassword, findUserById } from '~/.server/services/user-service';
 import { authenticate } from '~/.server/utils/auth-util';
 import { successMessage } from '~/.server/utils/message-util';
-import { UserCreateForm } from '~/components/User/UserCreateForm';
+import { UserPasswordForm } from '~/components/User/UserPasswordForm';
+import { UserUpdateForm } from '~/components/User/UserUpdateForm';
 import i18next from '~/i18n/i18next.server';
-import { UpdateUserSchema } from '~/validations/user-validation';
+import { ChangePasswordSchema } from '~/validations/user-validation';
 import { getErrorsObject } from '~/validations/validation-util';
 
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-    await authenticate(request, `/user/create/${params.id}`)
+    await authenticate(request, `/user/password/${params.id}`)
     const user = await findUserById(params.id || "0")
     return data(user);
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-    const loggedUser = await authenticate(request, "/user/create");
+    const loggedUser = await authenticate(request, `/user/password/${params.id}`)
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
-    const validation = UpdateUserSchema.safeParse(payload);
+    const validation = ChangePasswordSchema.safeParse(payload);
 
     if (validation.success) {
         try {
-            const input = {
-                id: params.id,
-                updatedBy: validation.data.username,
-                updatedAt: new Date(),
-                ...validation.data,
-            };
+            const { username, password } = validation.data;
+			const input = {
+				username,
+				password,
+				updatedBy: validation.data.username,
+				updatedAt: new Date(),
+			};
 
-            if (loggedUser.username !== input.updatedBy) {
-                input.updatedBy = loggedUser.username;
-            }
+			if (loggedUser.username !== input.updatedBy) {
+				input.updatedBy = loggedUser.username;
+			}
 
-            await updateUser(input);
+            await changePassword(input);
             return await successMessage(request, t("dataIsUpdated", { arg: validation.data.username }), "/user");
         } catch (error: any) {
             return data({ errorMessage: error.message });
@@ -45,7 +47,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 }
 
 
-export default function UserUpdatePage() {
+export default function UserPasswordRoute() {
 
     const user = useLoaderData<Omit<User, "password"> | undefined>();
 
@@ -69,10 +71,17 @@ export default function UserUpdatePage() {
 
     }, [actionData]);
 
-    return (
-        <UserCreateForm
-            user={user}
-            errorMessage={errorMessage}
-            validationError={validationError} />
-    )
+    if(user){
+        return (
+            <UserPasswordForm
+                user={user}
+                errorMessage={errorMessage}
+                validationError={validationError} />
+        )
+    }else{
+        return (
+            <div>Not found</div>
+        )
+    }
+    
 }

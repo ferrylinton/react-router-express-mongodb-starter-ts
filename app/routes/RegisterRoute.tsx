@@ -1,77 +1,60 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { data, Form, Link, LoaderFunctionArgs, redirect, useActionData } from 'react-router';
-import { generateToken } from '~/.server/services/auth-service';
-import { commitSession, getUserSession } from '~/.server/utils/sessions';
+import { data, Form, Link, useActionData } from 'react-router';
+import { createUser } from '~/.server/services/user-service';
+import { successMessage } from '~/.server/utils/message-util';
 import { Button } from '~/components/Button/Button';
 import { InputForm } from '~/components/Form/InputForm';
 import i18next from '~/i18n/i18next.server';
-import { AuthenticateSchema } from '~/validations/authenticate-schema';
+import { RegisterSchema } from '~/validations/authenticate-schema';
 import { getErrorsObject } from '~/validations/validation-util';
-import type { Route } from "./+types/home";
+import { Route } from '../+types/root';
+
 
 type ActionData = {
     errorMessage?: string
     validationError?: ValidationError
 }
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
-    const session = await getUserSession(request);
-
-    if (session.has('loggedUser')) {
-        return redirect("/");
-    }
-}
 
 export const action = async ({ request }: Route.ActionArgs) => {
-    const session = await getUserSession(request);
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
-    const validation = AuthenticateSchema.safeParse(payload);
+    const validation = RegisterSchema.safeParse(payload);
 
     if (validation.success) {
         try {
-            const { username, password } = validation.data;
-            const loggedUser = await generateToken(username, password);
-
-            if (typeof loggedUser === "object") {
-                session.set("loggedUser", loggedUser);
-                return redirect("/", {
-                    headers: {
-                        "Set-Cookie": await commitSession(session),
-                    },
-                });
-            } else {
-                return data({ errorMessage: t(loggedUser) });
-            }
+            const { passwordConfirm, ...input } = validation.data;
+            await createUser({ ...input, role: 'USER' });
+            return await successMessage(request, t("dataIsSaved", { arg: validation.data.username }), "/register");
 
         } catch (error: any) {
             return data({ errorMessage: error.message });
         }
     } else {
-        return data({ validationError: getErrorsObject(validation.error) });
+        return data({ validationError: getErrorsObject(validation.error), user: payload });
     }
 }
 
-export default function Login() {
+export default function RegisterRoute() {
     const { t } = useTranslation();
 
     const actionData = useActionData<ActionData>();
 
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-    const [validationError, setValidationError] = useState<ValidationError | null>(null);
+    const [validationError, setValidationError] = useState<ValidationError | undefined>(undefined);
 
     useEffect(() => {
-       
+
         if (actionData?.validationError) {
             setValidationError(actionData.validationError);
-            setErrorMessage(null);
+            setErrorMessage(undefined);
         }
 
         if (actionData?.errorMessage) {
             setErrorMessage(actionData.errorMessage);
-            setValidationError(null);
+            setValidationError(undefined);
         }
     }, [actionData]);
 
@@ -88,6 +71,13 @@ export default function Login() {
 
                     <InputForm
                         type="text"
+                        maxLength={50}
+                        name="email"
+                        validationError={validationError}
+                    />
+
+                    <InputForm
+                        type="text"
                         maxLength={20}
                         name="username"
                         validationError={validationError}
@@ -100,18 +90,23 @@ export default function Login() {
                         validationError={validationError}
                     />
 
+                    <InputForm
+                        type="password"
+                        maxLength={30}
+                        name="passwordConfirm"
+                        validationError={validationError}
+                    />
+
                     <Button type="submit" variant="primary" size="big">
-                        {t("login")}
+                        {t("register")}
                     </Button>
 
-                    <div className="flex justify-between uppercase">
-                        <Link to="/register">
-                            {t("register")}
-                        </Link>
-                        <Link to="/forgotpassword">
-                            {t("forgotPassword")}
+                    <div className="flex justify-center uppercase">
+                        <Link to="/login">
+                            {t("login")}
                         </Link>
                     </div>
+
                 </Form>
             </div>
         </>

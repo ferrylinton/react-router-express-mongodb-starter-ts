@@ -1,19 +1,19 @@
 // React Router generated types for route:
-// routes/user/update.tsx
+// routes/ResetPasswordRoute.tsx
 
 import type * as T from "react-router/route-module"
 
-import type { Info as Parent0 } from "../../../+types/root"
-import type { Info as Parent1 } from "../../../components/Layout/+types/Layout"
+import type { Info as Parent0 } from "../../+types/root"
+import type { Info as Parent1 } from "../../components/Layout/+types/PublicLayout"
 
-type Module = typeof import("../update")
+type Module = typeof import("../ResetPasswordRoute")
 
 export type Info = {
   parents: [Parent0, Parent1],
-  id: "routes/user/update"
-  file: "routes/user/update.tsx"
-  path: "user/update/:id"
-  params: {"id": string}
+  id: "routes/ResetPasswordRoute"
+  file: "routes/ResetPasswordRoute.tsx"
+  path: "resetpassword"
+  params: {}
   module: Module
   loaderData: T.CreateLoaderData<Module>
   actionData: T.CreateActionData<Module>

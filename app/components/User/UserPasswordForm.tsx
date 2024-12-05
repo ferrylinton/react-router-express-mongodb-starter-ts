@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next';
+import { Form, useNavigate } from 'react-router';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
-import { SelectRole } from '../Select/SelectRole';
-import { Form } from 'react-router';
 
 
-export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<UserFormProps>) => {
+export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFormProps) => {
 	const { t } = useTranslation();
+
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -21,17 +22,10 @@ export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<
 
 					<InputForm
 						type="text"
-						maxLength={50}
-						name="email"
-						defaultValue={user?.email}
-						validationError={validationError}
-					/>
-
-					<InputForm
-						type="text"
 						maxLength={20}
 						name="username"
-						validationError={validationError}
+						value={user.username}
+						readOnly
 					/>
 
 					<InputForm
@@ -48,11 +42,18 @@ export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<
 						validationError={validationError}
 					/>
 
-					<SelectRole />
-
-					<Button type="submit" variant="primary" size="big">
-						{t("create")}
-					</Button>
+					<div className="grid grid-cols-2 gap-1">
+						<Button
+							type="button"
+							size="big"
+							onClick={() => navigate('/user', { replace: true })}
+						>
+							{t("back")}
+						</Button>
+						<Button type="submit" variant="primary" size="big">
+							{t("update")}
+						</Button>
+					</div>
 				</Form>
 			</div>
 		</>

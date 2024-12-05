@@ -27,12 +27,7 @@ const transporter = nodemailer.createTransport({
 export const generateMail = (url: string) => {
 	if (!mailContent) {
 		const mailFile = path.join(process.cwd(), "templates", "mail.html");
-		if (fs.existsSync(mailFile)) {
-			mailContent = fs.readFileSync(mailFile, 'utf8');
-		} else {
-			mailContent = fs.readFileSync(path.join(__dirname, '../templates/mail.html'), 'utf8');
-		}
-
+		mailContent = fs.readFileSync(mailFile, 'utf8');
 	}
 
 	return mailContent.replace('###url###', url);

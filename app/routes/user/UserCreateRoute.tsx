@@ -8,7 +8,7 @@ import i18next from '~/i18n/i18next.server';
 import { CreateUserSchema } from '~/validations/user-validation';
 import { getErrorsObject } from '~/validations/validation-util';
 
-export const loader = async ({request, params }: LoaderFunctionArgs) => {
+export const loader = async ({request }: LoaderFunctionArgs) => {
     await authenticate(request, "/user/create");
 };
 
@@ -32,9 +32,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     }
 }
 
-export default function UserCreatePage() {
+export default function UserCreateRoute() {
 
-    const actionData = useActionData<UserFormProps>();
+    const actionData = useActionData<Partial<UserFormProps>>();
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
@@ -42,8 +42,6 @@ export default function UserCreatePage() {
 
 
     useEffect(() => {
-
-        console.log(actionData);
 
         if (actionData?.validationError) {
             setValidationError(actionData.validationError);

@@ -15,7 +15,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 	const session = await getUserSession(request);
 
-	const toastMessage = session.get("toastMessage") as ToastMessage;
+	const toastMessage = session.get("toastMessage");
 
 	if (toastMessage) {
 		return data(

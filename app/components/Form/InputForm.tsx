@@ -4,7 +4,7 @@ import styles from './InputForm.module.css';
 
 type InputFormProps = {
 	name: string;
-	validationError?: ValidationError | null;
+	validationError?: ValidationError | undefined;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const InputForm = ({ name, validationError, ...otherProps }: InputFormProps) => {
