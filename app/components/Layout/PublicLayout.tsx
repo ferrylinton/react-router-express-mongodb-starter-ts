@@ -12,11 +12,11 @@ import styles from './Layout.module.css';
 export async function loader({ request }: Route.LoaderArgs) {
 	const session = await getUserSession(request);
 
-	const toastMessage = session.get("toastMessage");
+	const toastData = session.get("toastData");
 
-	if (toastMessage) {
+	if (toastData) {
 		return data(
-			{ toastMessage },
+			{ toastData },
 			{ headers: { "Set-Cookie": await commitSession(session) } },
 		);
 	}
@@ -30,9 +30,8 @@ export default function PublicLayout() {
 
 	useEffect(() => {
 
-		if (loaderData && loaderData.toastMessage) {
-			const { message, type } = loaderData.toastMessage;
-			toast(message, type === "error");
+		if (loaderData && loaderData.toastData) {
+			toast(loaderData.toastData);
 		}
 
 	}, [loaderData]);

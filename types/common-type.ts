@@ -42,5 +42,3 @@ type ErrorData = {
 	message?: string
 	arg?: string
 }
-
-type ToastMessage = { message: string; type: "success" | "error" }

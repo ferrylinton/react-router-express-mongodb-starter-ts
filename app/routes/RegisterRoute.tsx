@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { data, Form, Link, useActionData } from 'react-router';
 import { createUser } from '~/.server/services/user-service';
-import { successMessage } from '~/.server/utils/message-util';
+import { toast } from '~/.server/utils/message-util';
 import { Button } from '~/components/Button/Button';
 import { InputForm } from '~/components/Form/InputForm';
 import i18next from '~/i18n/i18next.server';
@@ -26,7 +26,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
         try {
             const { passwordConfirm, ...input } = validation.data;
             await createUser({ ...input, role: 'USER' });
-            return await successMessage(request, t("dataIsSaved", { arg: validation.data.username }), "/register");
+            return await toast(request, t("dataIsSaved", { arg: validation.data.username }), "/register");
 
         } catch (error: any) {
             return data({ errorMessage: error.message });

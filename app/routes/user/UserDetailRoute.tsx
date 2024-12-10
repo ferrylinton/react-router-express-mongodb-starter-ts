@@ -1,7 +1,8 @@
-import { ActionFunctionArgs, data, LoaderFunctionArgs, redirect, useActionData, useLoaderData } from 'react-router';
+import { ActionFunctionArgs, data, LoaderFunctionArgs, useLoaderData } from 'react-router';
 import { deleteUserById, findUserById } from '~/.server/services/user-service';
-import { commitSession, getUserSession } from '~/.server/utils/sessions';
+import { toast } from '~/.server/utils/message-util';
 import { UserDetail } from '~/components/User/UserDetail';
+import i18next from '~/i18n/i18next.server';
 
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -10,18 +11,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
+    const t = await i18next.getFixedT(request);
     const formData = await request.formData();
     const username = formData.get("username")?.valueOf() || "";
 
     try {
         await deleteUserById(params.id || "0");
-        const session = await getUserSession(request);
-        session.flash("data", { message: "dataIsDeleted", arg: username as string });
-        return redirect("/user", {
-            headers: {
-                "Set-Cookie": await commitSession(session),
-            },
-        });
+        return await toast(request, t("dataIsDeleted", { arg: username }), "/user");
     } catch (error: any) {
         return data({ errorMessage: error.message });
     }
@@ -30,8 +26,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function UserDetailRoute() {
 
     const user = useLoaderData<typeof loader>();
-
-    const deleteResult = useActionData<KeyValue>();
 
     return (
         <UserDetail user={user} />

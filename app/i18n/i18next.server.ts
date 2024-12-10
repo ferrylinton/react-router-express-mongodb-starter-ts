@@ -1,17 +1,14 @@
-import * as cookie from 'cookie';
 import Backend from "i18next-fs-backend/cjs";
 import { resolve } from "node:path";
 import { RemixI18Next } from "remix-i18next/server";
+import { findLocale } from "~/.server/utils/cookies-util";
 import i18n from "~/i18n/i18n";
 
 const i18next = new RemixI18Next({
   detection: {
     supportedLanguages: i18n.supportedLngs,
     fallbackLanguage: i18n.fallbackLng,
-    async findLocale(request) {
-      const cookies = cookie.parse(request.headers.get("Cookie") || "");
-      return cookies.locale || i18n.fallbackLng;
-    },
+    findLocale,
   },
   // This is the configuration for i18next used
   // when translating messages server-side only

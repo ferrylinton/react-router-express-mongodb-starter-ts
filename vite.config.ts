@@ -6,16 +6,19 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import { envOnlyMacros } from "vite-env-only"
 
 export default defineConfig((config) => {
+
+  console.log(config);
+
   return {
-    esbuild: {
-      supported: {
-        'top-level-await': true //browsers can handle top-level-await features
-      },
-    },
+    // esbuild: {
+    //   supported: {
+    //     'top-level-await': true
+    //   },
+    // },
     build: {
       rollupOptions: config.isSsrBuild
         ? {
-          input: "./server/server.ts"
+          input: "./server/server-prod.ts"
         }
         : undefined,
     },

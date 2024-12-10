@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { data, Form, Link, LoaderFunctionArgs, useActionData, useLoaderData } from 'react-router';
 import { findTokenById } from '~/.server/services/password-token-service';
 import { changePassword } from '~/.server/services/user-service';
-import { successMessage } from '~/.server/utils/message-util';
+import { toast } from '~/.server/utils/message-util';
 import { Button } from '~/components/Button/Button';
 import { InputForm } from '~/components/Form/InputForm';
 import i18next from '~/i18n/i18next.server';
@@ -41,7 +41,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 };
 
                 await changePassword(input);
-                return await successMessage(request, t("dataIsSaved", { arg: passwordToken.username }), "/login");
+                return await toast(request, t("dataIsSaved", { arg: passwordToken.username }), "/login");
             } else {
                 return data({ errorMessage: t("invalidToken") });
             }

@@ -2,20 +2,15 @@
 	position: fixed;
 	inset: 0;
 	animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-	background-color: hsla(var(--base-h), var(--base-s), 90%, 0.2);
-	backdrop-filter: blur(2px);
+	background-color: hsl(0, 0%, 0%, 0.5);
 	z-index: 900;
 }
 
 .alert-dialog-content {
 	z-index: 901;
-	background-color: var(--base);
-	color: var(--text);
-	border-radius: 6px;
-	border: solid 1px var(--base-75);
-	box-shadow:
-		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-		hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+	background-color: var(--body-bg);
+	color: var(--body-text);
+	border-radius: 3px;
 	position: fixed;
 	top: 50%;
 	left: 50%;

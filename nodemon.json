@@ -2,5 +2,5 @@
 	"watch": ["src/server/**"],
 	"ext": "[j|t]s",
 	"ignore": ["*.log"],
-	"exec": "tsx --tsconfig tsconfig.vite.json ./server/server.ts"
+	"exec": "tsx --tsconfig tsconfig.vite.json ./server/server-dev.ts"
 }

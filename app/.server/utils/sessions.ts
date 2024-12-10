@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, redirect } from "react-router";
+import { createCookieSessionStorage } from "react-router";
 import { COOKIE_SECRET } from "../config/constant";
 
 type SessionData = {
@@ -7,8 +7,7 @@ type SessionData = {
 };
 
 type SessionFlashData = {
-    data?: KeyValue
-    toastMessage? : ToastMessage
+    toastData? : ToastData
 };
 
 const sessionStorage =

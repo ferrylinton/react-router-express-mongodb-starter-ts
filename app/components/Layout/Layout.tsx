@@ -3,7 +3,6 @@ import { data, Outlet, useLoaderData } from 'react-router';
 import { authenticate } from '~/.server/utils/auth-util';
 import { commitSession, getUserSession } from '~/.server/utils/sessions';
 import { Route } from '../../+types/root';
-import { AppProvider } from '../../providers/AppProvider';
 import { useToastContext } from '../../providers/ToastProvider';
 import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 import { Navbar } from '../Navbar/Navbar';
@@ -15,11 +14,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 	const session = await getUserSession(request);
 
-	const toastMessage = session.get("toastMessage");
+	const toastData = session.get("toastData");
 
-	if (toastMessage) {
+	if (toastData) {
 		return data(
-			{ toastMessage },
+			{ toastData },
 			{ headers: { "Set-Cookie": await commitSession(session) } },
 		);
 	}
@@ -34,25 +33,22 @@ export default function Layout() {
 	useEffect(() => {
 
 		if (loaderData) {
-			const { message, type } = loaderData.toastMessage;
-			toast(message, type === "error");
+			toast(loaderData.toastData);
 		}
 
 	}, [loaderData]);
 
 	return (
-		<AppProvider>
-			<div className={styles.layout}>
-				<Sidebar />
-				<div className={styles['main-wrapper']}>
-					<Navbar />
-					<main>
-						<ConfirmDialog />
-						<Outlet />
-					</main>
-				</div>
+		<div className={styles.layout}>
+			<Sidebar />
+			<div className={styles['main-wrapper']}>
+				<Navbar />
+				<main>
+					<ConfirmDialog />
+					<Outlet />
+				</main>
 			</div>
-		</AppProvider>
+		</div>
 	);
 }
 

@@ -2,6 +2,7 @@ import { data, LoaderFunctionArgs, useLoaderData } from 'react-router';
 import { findUsers } from '~/.server/services/user-service';
 import { authenticate } from '~/.server/utils/auth-util';
 import { UserTable } from '~/components/User/UserTable';
+import * as cookie from 'cookie';
 
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -17,8 +18,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     }
 
     const pageable = await findUsers(requestParams);
+    const expires = new Date(
+        new Date().getTime() + 0.3 * 60 * 1000
+    );
+    
 
-    return data({ pageable });
+    return data({ pageable },{ headers: { "Set-Cookie": cookie.serialize("foo", "bar", {expires}) } },);
 };
 
 export default function UserListRoute() {

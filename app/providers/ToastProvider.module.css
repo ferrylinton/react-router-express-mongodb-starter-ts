@@ -16,12 +16,15 @@
 	outline: none;
 }
 
+.dark .ToastRoot{
+	background-color: blue;
+}
+
 .ToastRoot {
-	background-color: white;
+	--toast-bg: hsl(var(--success-h), var(--success-s), var(--success-l));
+	background-color: var(--toast-bg);
+	color: var(--inverse-text);
 	border-radius: 6px;
-	box-shadow:
-		hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-		hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
 	padding: 15px;
 	display: grid;
 	grid-template-areas: 'title action' 'description action';
@@ -29,18 +32,19 @@
 	column-gap: 15px;
 	align-items: start;
 
-	&[data-state='true'] {
+	&[data-type=error] {
 		color: var(--danger);
 	}
 
 	& button {
+		--color: hsl(var(--inverse-text-h), var(--inverse-text-s), 80%);
 		font-size: 1.8rem;
-		color: var(--base-60);
+		color: var(--color);
 		line-height: 1;
 		font-weight: lighter;
 
 		&:hover {
-			color: var(--primary);
+			color: var(--inverse-text);
 		}
 
 		& svg {

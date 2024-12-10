@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, data, redirect } from "react-router";
 import { updateUser } from "~/.server/services/user-service";
 import { authenticate } from "~/.server/utils/auth-util";
-import { successMessage } from "~/.server/utils/message-util";
+import { toast } from "~/.server/utils/message-util";
 import i18next from "~/i18n/i18next.server";
 import { UpdateUserSchema } from "~/validations/user-validation";
 
@@ -25,7 +25,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             }
 
             await updateUser(input);
-            return await successMessage(request, t("dataIsUpdated", { arg: input.id }), "/user");
+            return await toast(request, t("dataIsUpdated", { arg: input.id }), "/user");
         } catch (error: any) {
             return data({ errorMessage: error.message });
         }

@@ -1,4 +1,5 @@
 
+import { formatToDate } from '~/utils/date-util';
 import { Truncate } from '../Truncate/Truncate';
 
 type Props = {
@@ -17,8 +18,7 @@ export const UserTableItem = ({ index, user }: Props) => {
 					<Truncate content={user.email} />
 				</td>
 				<td>
-
-					{user.createdAt.toLocaleString()}
+					{formatToDate(user.createdAt)}
 				</td>
 			</tr>
 		</>

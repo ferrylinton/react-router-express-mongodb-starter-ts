@@ -2,6 +2,9 @@
 	--sidebar-width: 250px;
 	--navbar-height: 50px;
 	--body-font: 'Poppins', sans-serif;
+}
+:root {
+	--shadow-1 : 0 0 20px hsla(0, 0%, 0%, 0.7);
 
 	--base-h: 210;
 	--base-s: 10%;
@@ -53,15 +56,16 @@
 	--accent-s: 100%;
 	--accent-l: 63%;
 
+
 	--success: hsl(129, 53%, 46%);
 	--success-h: 129;
 	--success-s: 53%;
 	--success-l: 46%;
 
-	--danger: hsl(4, 90%, 58%);
-	--danger-h: 4;
-	--danger-s: 90%;
-	--danger-l: 58%;
+	--danger: hsl(354, 70%, 54%);
+	--danger-h: 354;
+	--danger-s: 70%;
+	--danger-l: 54%;
 
 	--inverse-text: hsl(0, 0%, 100%);
 	--inverse-text-h: 0;
@@ -73,6 +77,8 @@
 }
 
 .dark {
+	--shadow-1 : 0 0 20px hsla(0, 0%, 57%, 0.7);
+	
 	--base-h: 0;
 	--base-s: 0%;
 	--base: hsl(var(--base-h), var(--base-s), 15%);
@@ -123,10 +129,10 @@
 	--accent-s: 100%;
 	--accent-l: 63%;
 
-	--success: hsl(88, 50%, 53%);
-	--success-h: 88;
-	--success-s: 50%;
-	--success-l: 53%;
+	--success: hsl(129, 53%, 46%);
+	--success-h: 129;
+	--success-s: 53%;
+	--success-l: 46%;
 
 	--danger: hsl(6, 78%, 57%);
 	--danger-h: 6;

@@ -4,38 +4,30 @@ import CloseIcon from '../icons/CloseIcon';
 import styles from './ToastProvider.module.css';
 
 export const ToastContext = createContext<ToastContextProps>({
-	toast: () => Function(),
+	toast: () => Function()
 });
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
 	const [open, setOpen] = useState(false);
 
-	const [message, setMessage] = useState('');
+	const [toastData, setToastData] = useState<ToastData>();
 
-	const [isError, setIsError] = useState(false);
-
-	const toast = (message: string, isError?: boolean) => {
-		setIsError(isError || false);
-		setMessage(message);
+	const toast = (toastData : ToastData) => {
+		setToastData(toastData);
 		setOpen(true);
 	};
-
-	const value: ToastContextProps = {
-		toast,
-	};
-
 	return (
-		<ToastContext.Provider value={value}>
-			<Toast.Provider duration={5000}>
+		<ToastContext.Provider value={{ toast }}>
+			<Toast.Provider duration={15000}>
 				{children}
 				<Toast.Root
 					className={styles.ToastRoot}
-					data-state={isError}
+					data-type={toastData?.type}
 					open={open}
 					onOpenChange={setOpen}
 				>
 					<Toast.Description asChild>
-						<p>{message}</p>
+						<p>{toastData?.message}</p>
 					</Toast.Description>
 					<Toast.Close aria-label="Close">
 						<CloseIcon />

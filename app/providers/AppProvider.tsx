@@ -1,6 +1,6 @@
-import Cookies from 'js-cookie';
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
-import { DEFAULT_LOCALE, LOGGED_USER_COOKIE, PREVIOUS_URL } from '~/utils/constant';
+import { DEFAULT_LOCALE } from '~/utils/constant';
+
 
 const defaultValue: AppContextProps = {
 	getSidebarState: () => true,
@@ -12,6 +12,7 @@ const defaultValue: AppContextProps = {
 export const AppContext = createContext<AppContextProps | undefined>(defaultValue);
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
+
 	const [locale, setCurrentLocale] = useState<string>(DEFAULT_LOCALE);
 
 	const [showSidebar, setShowSidebar] = useState(false);

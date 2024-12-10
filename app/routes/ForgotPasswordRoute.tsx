@@ -5,7 +5,7 @@ import { HOST } from '~/.server/config/constant';
 import { generateMail, sendMail } from '~/.server/services/mail-service';
 import { createPasswordToken } from '~/.server/services/password-token-service';
 import { findUserByEmail } from '~/.server/services/user-service';
-import { successMessage } from '~/.server/utils/message-util';
+import { toast } from '~/.server/utils/message-util';
 import { Button } from '~/components/Button/Button';
 import { InputForm } from '~/components/Form/InputForm';
 import i18next from '~/i18n/i18next.server';
@@ -35,7 +35,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 				const { insertedId: token } = await createPasswordToken(username);
 				const html = generateMail(`${HOST}/resetpassword?token=${token}`);
 				await sendMail(email, html);
-				return await successMessage(request, t("emailSent"), "/forgotpassword");
+				return await toast(request, t("emailSent"), "/forgotpassword");
 			} else {
 				return data({ errorMessage: t('emailNotFound') });
 			}

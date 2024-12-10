@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { ActionFunctionArgs, data, LoaderFunctionArgs, useActionData, useLoaderData } from 'react-router';
 import { findUserById, updateUser } from '~/.server/services/user-service';
 import { authenticate } from '~/.server/utils/auth-util';
-import { successMessage } from '~/.server/utils/message-util';
-import { UserCreateForm } from '~/components/User/UserCreateForm';
+import { toast } from '~/.server/utils/message-util';
 import { UserUpdateForm } from '~/components/User/UserUpdateForm';
 import i18next from '~/i18n/i18next.server';
 import { UpdateUserSchema } from '~/validations/user-validation';
@@ -36,7 +35,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             }
 
             await updateUser(input);
-            return await successMessage(request, t("dataIsUpdated", { arg: validation.data.username }), "/user");
+            return await toast(request, t("dataIsUpdated", { arg: validation.data.username }), "/user");
         } catch (error: any) {
             return data({ errorMessage: error.message });
         }
