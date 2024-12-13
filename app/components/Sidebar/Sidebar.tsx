@@ -15,7 +15,7 @@ export const Sidebar = () => {
 
 	const submit = useSubmit()
 
-	const { toggleSidebar, getSidebarState } = useAppContext();
+	const { toggleSidebar, sidebarState } = useAppContext();
 
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
@@ -38,7 +38,7 @@ export const Sidebar = () => {
 
 	return (
 		<>
-			<aside className={styles['sidebar']} data-show={getSidebarState()}>
+			<aside role='navigation' className={styles['sidebar']} data-state={sidebarState}>
 				<div className={styles['sidebar-top']}>
 					<a className="logo" href="/">
 						<span>Simple</span>
@@ -53,10 +53,10 @@ export const Sidebar = () => {
 					</Link>
 					<CollapsibleMenuItem label={'Profile'}>
 						<Link onClick={handleLink} to="/profile">
-						{t("profile")}
+							{t("profile")}
 						</Link>
 						<Link onClick={handleLink} to="/changepassword">
-						{t("changePassword")}
+							{t("changePassword")}
 						</Link>
 					</CollapsibleMenuItem>
 					<CollapsibleMenuItem label={'Todo'}>
@@ -82,7 +82,7 @@ export const Sidebar = () => {
 			</aside>
 			<div
 				className={styles['sidebar-overlay']}
-				data-show={getSidebarState()}
+				data-state={sidebarState}
 				onClick={() => toggleSidebar()}
 			></div>
 		</>

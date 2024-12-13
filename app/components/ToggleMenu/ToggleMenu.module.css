@@ -11,28 +11,29 @@
 	background-color: transparent;
 
 	&:hover span {
-		background-color: var(--text);
+		opacity: 1;
 	}
 
 	& span {
 		width: 30px;
-		height: 0.1rem;
+		min-height: 0.1rem;
 		display: block;
-		border-radius: 10px;
+		border-radius: 2px;
 		transition: transform 0.5s ease-in-out;
-		background-color: var(--base-40);
+		opacity: 0.6;
+		background-color: currentColor;
 	}
 }
 
-.toggle-menu[data-show='true'] span:nth-child(1) {
+.toggle-menu[data-state=open] span:nth-child(1) {
 	transform: translateY(9px) rotate(45deg);
 }
 
-.toggle-menu[data-show='true'] span:nth-child(2) {
+.toggle-menu[data-state=open] span:nth-child(2) {
 	opacity: 0;
 }
 
-.toggle-menu[data-show='true'] span:nth-child(3) {
+.toggle-menu[data-state=open] span:nth-child(3) {
 	transform: translateY(-10px) rotate(-45deg);
 }
 

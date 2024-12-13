@@ -1,4 +1,16 @@
+:global(.dark){
+	.tooltip-content{
+		--tooltip-bg: hsl(var(--base-h), var(--base-s), 28%);
+		--tooltip-border: hsl(var(--base-h), var(--base-s), 40%);
+		--tooltip-shadow : hsla(var(--base-h), var(--base-s), 10%, 0.5);
+	}
+}
+
 .tooltip-content {
+	--tooltip-bg: hsl(var(--base-h), var(--base-s), 95%);
+	--tooltip-border: hsl(var(--base-h), var(--base-s), 80%);
+	--tooltip-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+
 	border-radius: 4px;
 	padding: 10px 15px;
 	font-size: 15px;
@@ -7,24 +19,15 @@
 	animation-duration: 400ms;
 	animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 	will-change: transform, opacity;
-	background-color: var(--base);
-	border: solid 1px var(--base-70);
-	box-shadow: hsla(var(--base-h), var(--base-s), var(--base-l), 0.5) 0px 0px 10px;
+	background-color: var(--tooltip-bg);
+	border: solid 1px var(--tooltip-border);
+	box-shadow: var(--tooltip-shadow) 0px 0px 10px;
 }
 
 .tooltip-content[data-state='delayed-open'][data-side='top'] {
 	animation-name: slideDownAndFade;
 }
-.tooltip-content[data-state='delayed-open'][data-side='right'] {
-	animation-name: slideLeftAndFade;
-}
-.tooltip-content[data-state='delayed-open'][data-side='bottom'] {
-	animation-name: slideUpAndFade;
-}
-.tooltip-content[data-state='delayed-open'][data-side='left'] {
-	animation-name: slideRightAndFade;
-}
 
 .tooltip-arrow {
-	fill: var(--base-60);
+	fill: var(--tooltip-border);
 }

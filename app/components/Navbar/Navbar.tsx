@@ -9,10 +9,10 @@ import styles from './Navbar.module.css';
 export const Navbar = () => {
 
 	return (
-		<nav className={clsx(styles['navbar'])}>
-			<div className={styles['logged']}>
+		<nav role='navigation' className={clsx(styles['navbar'])}>
+			<div className="w-full flex justify-between items-center">
 				<div className="flex items-center justify-center gap-2">
-				<ToggleMenu className="md:hidden" />
+					<ToggleMenu className="md:hidden" />
 					<Link to={'/'}>
 						Home
 					</Link>

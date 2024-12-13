@@ -11,32 +11,9 @@ import styles from './Layout.module.css';
 
 export async function loader({ request }: Route.LoaderArgs) {
 	await authenticate(request);
-
-	const session = await getUserSession(request);
-
-	const toastData = session.get("toastData");
-
-	if (toastData) {
-		return data(
-			{ toastData },
-			{ headers: { "Set-Cookie": await commitSession(session) } },
-		);
-	}
 }
 
 export default function Layout() {
-
-	const loaderData = useLoaderData<typeof loader>();
-
-	const { toast } = useToastContext();
-
-	useEffect(() => {
-
-		if (loaderData) {
-			toast(loaderData.toastData);
-		}
-
-	}, [loaderData]);
 
 	return (
 		<div className={styles.layout}>

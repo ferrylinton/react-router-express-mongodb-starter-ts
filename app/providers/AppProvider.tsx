@@ -1,39 +1,24 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
-import { DEFAULT_LOCALE } from '~/utils/constant';
 
 
 const defaultValue: AppContextProps = {
-	getSidebarState: () => true,
-	toggleSidebar: () => Function(),
-	locale: DEFAULT_LOCALE,
-	setLocale: () => Function()
+	sidebarState: "close",
+	toggleSidebar: () => Function()
 };
 
 export const AppContext = createContext<AppContextProps | undefined>(defaultValue);
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 
-	const [locale, setCurrentLocale] = useState<string>(DEFAULT_LOCALE);
-
-	const [showSidebar, setShowSidebar] = useState(false);
-
-	const setLocale = (locale: string) => {
-		setCurrentLocale(locale);
-	};
+	const [sidebarState, setSidebarState] = useState<SidebarState>(defaultValue.sidebarState);
 
 	const toggleSidebar = () => {
-		setShowSidebar(!showSidebar);
-	};
-
-	const getSidebarState = () => {
-		return showSidebar;
+		setSidebarState(sidebarState === "open" ? "close" : "open");
 	};
 
 	const value: AppContextProps = {
-		getSidebarState,
-		toggleSidebar,
-		locale,
-		setLocale
+		sidebarState,
+		toggleSidebar
 	};
 
 	return (
@@ -49,5 +34,6 @@ export const useAppContext = () => {
 	if (context === undefined) {
 		throw new Error('useAppContext must be used within a AppProvider');
 	}
+	
 	return context;
 };

@@ -5,10 +5,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 0 1rem;
 	background-color: var(--navbar-bg);
 	border-bottom: solid 1px var(--navbar-border);
-	padding: 0 1rem;
-	color: var(--base-60);
+	color: var(--navbar-text);
 }
 
 .navbar .logged {
@@ -20,10 +20,10 @@
 
 	& a {
 		text-transform: uppercase;
-		color: var(--base-60);
+		opacity: 0.7;
 
 		&:hover {
-			color: var(--base-50);
+			opacity: 1;
 		}
 	}
 }

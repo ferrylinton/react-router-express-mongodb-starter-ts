@@ -1,10 +1,23 @@
+:global(.dark){
+	.search-form{
+		--search-bg: hsl(var(--base-h), var(--base-s), 28%);
+		--button-bg: hsl(var(--base-h), var(--base-s), 22%);
+		--button-color: hsl(var(--base-h), var(--base-s), 38%);
+	}
+}
+
 .search-form {
+	--search-bg: hsl(var(--base-h), var(--base-s), 100%);
+	--button-bg: hsl(var(--base-h), var(--base-s), 80%);
+	--button-color: hsl(var(--base-h), var(--base-s), 60%);
+
 	width: 100%;
 	display: flex;
 	flex-wrap: nowrap;
-	border: solid 1px var(--base-75);
 	border-radius: 0.3rem;
 	overflow: hidden;
+	border: solid 1px var(--button-bg);
+	background-color: var(--search-bg);
 
 	&:focus-within {
 		border: solid 1px var(--primary);
@@ -24,7 +37,7 @@
 	& input {
 		width: 100%;
 		display: inline-block;
-		background-color: var(--base);
+		background-color: transparent;
 		padding: 0 1rem;
 	}
 
@@ -33,13 +46,21 @@
 		justify-content: center;
 		align-items: center;
 		width: 50px;
-		border-left: solid 1px var(--base-75);
-		background-color: var(--base-90);
-		color: var(--base-60);
+		background-color: var(--button-bg);
+		color: var(--button-color);
+
+		&:nth-of-type(1) svg{
+			height: 1.4rem;
+			width: auto;
+		}
+
+		&:nth-of-type(2) svg{
+			height: 1.4rem;
+			width: auto;
+		}
 
 		&:hover {
-			background-color: var(--base-90);
-			color: var(--base-50);
+			color: var(--primary);
 		}
 	}
 }

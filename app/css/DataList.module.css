@@ -1,28 +1,22 @@
-.data-toolbar {
-	display: flex;
-	align-items: end;
-	justify-content: space-between;
-	width: 100%;
-	margin: 4rem 0 0.5rem 0;
-}
-
-.data-toolbar .total {
-	line-height: 1;
-	font-size: 1rem;
-	font-weight: lighter;
-}
-
-.data-toolbar .btn {
-	min-width: 130px;
-	font-size: 0.9rem;
+:global(.dark){
+	.data-list{
+		--data-list-bg: hsl(var(--base-h), var(--base-s), 25%);
+		--truncate-bg: hsl(var(--base-h), var(--base-s), 22%);
+		--th-bg: hsl(var(--base-h), var(--base-s), 22%);
+		--td-border: hsl(var(--base-h), var(--base-s), 30%);
+	}
 }
 
 .data-list {
-	--border-color: var(--base-80);
+	--data-list-bg: hsl(var(--base-h), var(--base-s), 100%);
+	--truncate-bg: hsl(var(--base-h), var(--base-s), 90%);
+	--th-bg: hsl(var(--base-h), var(--base-s), 80%);
+	--td-border: hsl(var(--base-h), var(--base-s), 90%);
+
+	background-color: var(--data-list-bg);
 	border-radius: 0.5em;
-	border: solid 1px var(--border-color);
 	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 50px;
 	display: flex;
 
 	& [text-truncate='true'] {
@@ -34,7 +28,7 @@
 		text-overflow: ellipsis;
 
 		&:hover {
-			background-color: var(--base-90);
+			background-color: var(--truncate-bg);
 		}
 	}
 
@@ -54,8 +48,7 @@
 			overflow: hidden;
 			font-size: 0.9rem;
 			font-weight: bold;
-			border-bottom: solid 1px var(--base-70);
-			background-color: var(--base-95);
+			background-color: var(--th-bg);
 		}
 
 		& tbody td {
@@ -67,7 +60,7 @@
 		}
 
 		& tr:not(:last-child) {
-			border-bottom: solid 1px var(--border-color);
+			border-bottom: solid 1px var(--td-border);
 		}
 
 		& tr:nth-child(odd) {

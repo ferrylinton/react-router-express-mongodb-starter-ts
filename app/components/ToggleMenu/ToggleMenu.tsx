@@ -7,12 +7,12 @@ type ToggleMenuProps = {
 };
 
 export const ToggleMenu = ({ className }: ToggleMenuProps) => {
-	const { toggleSidebar, getSidebarState } = useAppContext();
+	const { toggleSidebar, sidebarState } = useAppContext();
 
 	return (
 		<button
 			className={clsx(className, styles['toggle-menu'])}
-			data-show={getSidebarState()}
+			data-state={sidebarState}
 			onClick={() => toggleSidebar()}
 		>
 			<span></span>

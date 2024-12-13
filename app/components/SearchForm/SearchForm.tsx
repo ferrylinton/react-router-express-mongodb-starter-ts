@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router';
 import { ReloadIcon } from '../../icons/ReloadIcon';
 import { SearchIcon } from '../../icons/SearchIcon';
 import styles from './SearchForm.module.css';
+import clsx from 'clsx';
 
 type SearchFormProps = {
 	action: string;
@@ -38,7 +39,7 @@ export const SearchForm = ({ action }: SearchFormProps) => {
 			autoComplete="off"
 			name="search-form"
 			onSubmit={handleSubmit}
-			className={styles['search-form']}
+			className={clsx('search-form-variable', styles['search-form'])}
 		>
 			<input
 				type="text"

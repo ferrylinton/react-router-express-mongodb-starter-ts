@@ -1,4 +1,16 @@
+:global(.dark){
+	.pagination{
+		--pagination-color: hsl(var(--base-h), var(--base-s), 65%);
+		--pagination-disabled-color: hsl(var(--base-h), var(--base-s), 45%);
+		--pagination-hover-bg: hsl(var(--base-h), var(--base-s), 25%);
+	}
+}
+
 .pagination {
+	--pagination-color: hsl(var(--base-h), var(--base-s), 40%);
+	--pagination-disabled-color: hsl(var(--base-h), var(--base-s), 60%);
+	--pagination-hover-bg: hsl(var(--base-h), var(--base-s), 90%);
+
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -22,23 +34,22 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 50%;
-		color: var(--base-50);
+		color: var(--pagination-color);
 
 		&:not(:has(svg)) {
-			background-color: var(--base-90);
 
 			&:not(.active):hover {
-				background-color: var(--base-80);
+				background-color: var(--pagination-hover-bg);
 			}
 		}
 
 		&:hover {
-			color: var(--base-40);
+			color: var(--body-text);
 		}
 
 		&:disabled {
 			cursor: not-allowed;
-			color: var(--base-80);
+			color: var(--pagination-disabled-color);
 		}
 
 		&.active {

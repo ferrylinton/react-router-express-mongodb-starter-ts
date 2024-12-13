@@ -17,13 +17,14 @@
 	flex-direction: column;
 	color: var(--sidebar-text);
 	background-color: var(--sidebar-bg);
+	box-shadow: var(--sidebar-shadow);
 
 	& .btn {
 		margin: 1rem 0.5rem;
 	}
 }
 
-.sidebar[data-show='true'] {
+.sidebar[data-state=open] {
 	visibility: visible;
 	opacity: 1;
 	transform: translateX(0);
@@ -50,7 +51,7 @@
 	z-index: 100;
 }
 
-.sidebar-overlay[data-show='true'] {
+.sidebar-overlay[data-state=open] {
 	display: block;
 }
 
@@ -113,7 +114,7 @@
 		}
 	}
 
-	.sidebar-overlay[data-show='true'] {
+	.sidebar-overlay[data-state=open] {
 		display: none;
 	}
 }

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   data,
@@ -9,6 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useRouteLoaderData,
 } from "react-router";
 import { useChangeLanguage } from "remix-i18next/react";
 import type { Route } from "./+types/root";
@@ -17,7 +19,7 @@ import { commitSession, getUserSession } from "./.server/utils/sessions";
 import stylesheet from "./css/index.css?url";
 import i18next from "./i18n/i18next.server";
 import { AppProvider } from "./providers/AppProvider";
-import { ToastProvider } from "./providers/ToastProvider";
+import { ToastProvider, useToastContext } from "./providers/ToastProvider";
 
 
 export const links: Route.LinksFunction = () => [
@@ -42,7 +44,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const locale = await i18next.getLocale(request);
   const session = await getUserSession(request);
   const theme = getCookieTheme(request);
-  const toastData = session.get("toastData") as ToastData;
+  const toastData = session.get("toastData");
 
   return data(
     { locale, theme, toastData },
@@ -59,18 +61,18 @@ export let handle = {
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  // Get the locale from the loader
-  const loaderData = useLoaderData<typeof loader | undefined>();
+  const loaderData = useRouteLoaderData<typeof loader>("root");
   const locale = loaderData?.locale || "id";
   const theme = loaderData?.theme || "light";
+ 
   const { i18n } = useTranslation();
+
 
   // This hook will change the i18n instance language to the current locale
   // detected by the loader, this way, when we do something to change the
   // language, this locale will change and i18next will load the correct
   // translation files
   useChangeLanguage(locale);
-
 
   return (
     <html lang={locale} dir={i18n.dir()} >
@@ -81,7 +83,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className={clsx(theme)}>
-        {children}
+        <AppProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </AppProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -90,12 +96,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+
+  const loaderData = useLoaderData<typeof loader>();
+
+  const { toast } = useToastContext();
+
+  useEffect(() => {
+
+    if (loaderData?.toastData) {
+      toast(loaderData?.toastData);
+    }
+
+  }, [loaderData]);
+
   return <>
-    <AppProvider>
-      <ToastProvider>
-        <Outlet />
-      </ToastProvider>
-    </AppProvider>
+    <Outlet />
   </>;
 }
 

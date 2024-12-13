@@ -58,7 +58,7 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 
 	return (
 		<>
-			<div className={styles['data-toolbar']}>
+			<div className="mt-8 mb-4">
 				<SearchForm action="/user" />
 			</div>
 			<div className={styles['data-list']}>

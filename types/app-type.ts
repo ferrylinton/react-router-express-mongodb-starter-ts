@@ -1,10 +1,10 @@
 type Theme = "light" | "dark"
 
+type SidebarState = "open" | "close"
+
 type AppContextProps = {
-	getSidebarState: () => boolean
+	sidebarState: SidebarState
 	toggleSidebar: () => void
-	locale: string
-	setLocale: (locale: string) => void
 }
 
 type ToastType = "success" | "error"
