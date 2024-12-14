@@ -1,3 +1,22 @@
+:global(.dark){
+	.sidebar{
+		--sidebar-bg: hsl(var(--base-h), var(--base-s), 23%);
+		--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
+		--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
+		--sidebar-border: hsl(var(--base-h), var(--base-s), 40%);
+		--sidebar-shadow: 0 14px 28px hsla(0, 0%, 40%, 0.25), 0 10px 10px hsla(0, 0%, 40%, 0.22);
+	}
+}
+
+.sidebar {
+	--sidebar-width: 250px;
+	--sidebar-bg: hsl(var(--base-h), var(--base-s), 23%);
+	--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
+	--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
+	--sidebar-border: hsl(var(--base-h), var(--base-s), 40%);
+	--sidebar-shadow: 0 14px 28px hsla(0, 0%, 0%, 0.25), 0 10px 10px hsla(0, 0%, 0%, 0.22);
+}
+
 .sidebar {
 	flex: none;
 	width: var(--sidebar-width);
@@ -18,10 +37,6 @@
 	color: var(--sidebar-text);
 	background-color: var(--sidebar-bg);
 	box-shadow: var(--sidebar-shadow);
-
-	& .btn {
-		margin: 1rem 0.5rem;
-	}
 }
 
 .sidebar[data-state=open] {

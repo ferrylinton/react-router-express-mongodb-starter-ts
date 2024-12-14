@@ -1,4 +1,16 @@
+:global(.dark){
+	.navbar{
+		--navbar-bg: hsl(var(--base-h), var(--base-s), 25%);
+		--navbar-border: hsl(var(--base-h), var(--base-s), 40%);
+	}
+}
+
 .navbar {
+	--navbar-height: 50px;
+	--navbar-bg: hsl(var(--base-h), var(--base-s), 100%);
+	--navbar-border: hsl(var(--base-h), var(--base-s), 90%);
+	--navbar-text: hsl(var(--base-h), var(--base-s), 50%);
+
 	flex: none;
 	width: 100%;
 	height: 50px;

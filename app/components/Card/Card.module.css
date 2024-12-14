@@ -1,7 +1,16 @@
+:global(.dark){
+	.card{
+		--card-border-color: hsl(var(--base-h), var(--base-s), 45%);
+		--card-bg: hsl(var(--base-h), var(--base-s), 30%);
+	}
+}
+
 .card {
-	--border-color: var(--base-90);
-	border: solid 1px var(--border-color);
-	background-color: var(--base);
+	--card-border-color: hsl(var(--base-h), var(--base-s), 80%);
+	--card-bg: hsl(var(--base-h), var(--base-s), 100%);
+
+	border: solid 1px var(--card-border-color);
+	background-color: var(--card-bg);
 	border-radius: 0.3rem;
 
 	& .card-header {
@@ -10,7 +19,7 @@
 		font-size: 0.9rem;
 		text-transform: uppercase;
 		padding: 0 1rem;
-		border-bottom: solid 1px var(--border-color);
+		border-bottom: solid 1px var(--card-border-color);
 	}
 
 	& .card-content {

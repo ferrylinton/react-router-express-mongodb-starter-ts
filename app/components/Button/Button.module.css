@@ -1,16 +1,21 @@
 :global(.dark){
 	.btn-secondary{
-		--btn-border: hsl(var(--base-h), var(--base-s), 45%);
+		--btn-border: hsl(var(--base-h), var(--base-s), 50%);
 		--btn-shadow: hsl(var(--base-h), var(--base-s), 25%);
-		--btn-bg: hsl(var(--base-h), var(--base-s), 30%);
-		--btn-color: hsl(var(--base-h), var(--base-s), 50%);
-		--btn-hover-bg: hsl(var(--base-h), var(--base-s), 28%);
-		--btn-hover-color: hsl(var(--base-h), var(--base-s), 60%);	
+		--btn-bg: hsl(var(--base-h), var(--base-s), 40%);
+		--btn-color: hsl(var(--base-h), var(--base-s), 80%);
+		--btn-hover-bg: hsl(var(--base-h), var(--base-s), 35%);
+		--btn-hover-color: hsl(var(--base-h), var(--base-s), 90%);	
 	}
 
 	.btn-primary {
 		--btn-border: hsl(var(--primary-h), var(--primary-s), 70%);
 		--btn-shadow: hsl(var(--primary-h), var(--primary-s), 25%);
+	}
+
+	.btn-danger {
+		--btn-border: hsl(var(--danger-h), var(--danger-s), 70%);
+		--btn-shadow: hsl(var(--danger-h), var(--danger-s), 25%);
 	}
 }
 
@@ -61,9 +66,12 @@
 
 
 .btn-danger {
-	color: hsl(var(--danger-h), var(--danger-s), 90%);
-	background-color: var(--danger);
-	box-shadow: var(--danger) 0 5px 10px -5px;
+	--btn-border: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 5%));
+	--btn-shadow: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 10%));
+	--btn-bg: var(--danger);
+	--btn-color: hsl(var(--danger-h), var(--danger-s), 90%);
+	--btn-hover-bg: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 4%));
+	--btn-hover-color: var(--inverse-text);
 }
 
 .btn-danger:hover {

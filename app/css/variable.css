@@ -1,10 +1,5 @@
 :root {
-	--sidebar-width: 250px;
-	--navbar-height: 50px;
 	--body-font: 'Poppins', sans-serif;
-
-	--shadow-1 : 0 0 20px hsla(0, 0%, 0%, 0.7);
-
 	--base-h: 210;
 	--base-s: 10%;
 }
@@ -13,27 +8,15 @@
 	--body-bg: hsl(var(--base-h), var(--base-s), 95%);
 	--body-text: hsl(var(--base-h), var(--base-s), 14%);
 
-	--navbar-bg: hsl(var(--base-h), var(--base-s), 100%);
-	--navbar-border: hsl(var(--base-h), var(--base-s), 90%);
-	--navbar-text: hsl(var(--base-h), var(--base-s), 50%);
-
-	--sidebar-bg: hsl(var(--base-h), var(--base-s), 23%);
-	--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
-	--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
-	--sidebar-border: hsl(var(--base-h), var(--base-s), 40%);
-	--sidebar-shadow: 0 14px 28px hsla(0, 0%, 0%, 0.25), 0 10px 10px hsla(0, 0%, 0%, 0.22);
-
-	
-
 	--primary: hsl(212, 74%, 45%);
 	--primary-h: 212;
 	--primary-s: 74%;
 	--primary-l: 45%;
 
-	--accent: hsl(107, 100%, 63%);
+	--accent: hsl(107, 83%, 55%);
 	--accent-h: 107;
-	--accent-s: 100%;
-	--accent-l: 63%;
+	--accent-s: 83%;
+	--accent-l: 55%;
 
 	--success: hsl(129, 53%, 46%);
 	--success-h: 129;
@@ -57,15 +40,6 @@
 .dark {
 	--body-bg: hsl(var(--base-h), var(--base-s), 30%);
 	--body-text: hsl(var(--base-h), var(--base-s), 90%);
-
-	--navbar-bg: hsl(var(--base-h), var(--base-s), 25%);
-	--navbar-border: hsl(var(--base-h), var(--base-s), 40%);
-
-	--sidebar-bg: hsl(var(--base-h), var(--base-s), 23%);
-	--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
-	--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
-	--sidebar-border: hsl(var(--base-h), var(--base-s), 40%);
-	--sidebar-shadow: 0 14px 28px hsla(0, 0%, 40%, 0.25), 0 10px 10px hsla(0, 0%, 40%, 0.22);
 
 	--primary: hsl(212, 74%, 45%);
 	--primary-h: 212;
