@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './InputForm.module.css';
+import styles from './Form.module.css';
 
 type InputFormProps = {
 	name: string;

@@ -2,8 +2,9 @@ import { useTranslation } from 'react-i18next';
 import { Form, useNavigate } from 'react-router';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
-import { SelectRole } from '../Select/SelectRole';
+import { SelectRole } from '../Form/SelectRole';
 import { Checkbox } from '../Form/Checkbox';
+import styles from '~/components/Form/Form.module.css';
 
 
 export const UserUpdateForm = ({ user, validationError, errorMessage }: UserFormProps) => {
@@ -13,12 +14,12 @@ export const UserUpdateForm = ({ user, validationError, errorMessage }: UserForm
 
 	return (
 		<>
-			<div className="container-center">
+			<div className="h-full flex justify-center items-center">
 				<Form
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form"
+					className={styles["form"]}
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 

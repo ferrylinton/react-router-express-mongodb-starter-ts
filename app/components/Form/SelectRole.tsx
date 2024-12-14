@@ -1,8 +1,10 @@
 import * as Select from '@radix-ui/react-select';
 import React, { useState } from 'react';
 import { CheckIcon } from '../../icons/CheckIcon';
-import styles from './Select.module.css';
+import styles from './Form.module.css';
 import clsx from 'clsx';
+import { TriangleUp } from '~/icons/TriangleUp';
+import { TriangleDown } from '~/icons/TriangleDown';
 
 type SelectRoleProps = {
 	defaultValue?: string;
@@ -20,11 +22,12 @@ export const SelectRole = ({ defaultValue = 'USER' }: SelectRoleProps) => {
 		>
 			<Select.Trigger className={styles['select-trigger']} aria-label="ROLE">
 				<Select.Value />
-				<span className={clsx(open ? 'triangle-up' : 'triangle-down')}></span>
+				{open ? <TriangleUp /> : <TriangleDown />}
 			</Select.Trigger>
 			<Select.Portal>
 				<Select.Content
 					className={styles['select-content']}
+					asChild={true}
 					position="popper"
 					side="bottom"
 					sideOffset={5}

@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
-import { SelectRole } from '../Select/SelectRole';
+import { SelectRole } from '../Form/SelectRole';
 import { Form } from 'react-router';
+import styles from '~/components/Form/Form.module.css';
 
 
 export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<UserFormProps>) => {
@@ -10,12 +11,12 @@ export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<
 
 	return (
 		<>
-			<div className="container-center">
+			<div className="h-full flex justify-center items-center">
 				<Form
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form"
+					className={styles["form"]}
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 

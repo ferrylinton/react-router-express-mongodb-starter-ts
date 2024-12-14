@@ -1,0 +1,194 @@
+:global(.dark){
+	.form{
+		--form-color: hsl(var(--base-h), var(--base-s), 65%);
+        --form-hover-color: hsl(var(--base-h), var(--base-s), 75%);
+        --form-border: hsl(var(--base-h), var(--base-s), 45%);
+        --form-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
+        --form-bg: hsl(var(--base-h), var(--base-s), 30%);
+        --form-disabled-bg: hsl(var(--base-h), var(--base-s), 85%);
+	}
+}
+
+.form {
+	--form-color: hsl(var(--base-h), var(--base-s), 65%);
+    --form-hover-color: hsl(var(--base-h), var(--base-s), 55%);
+	--form-border: hsl(var(--base-h), var(--base-s), 80%);
+    --form-shadow : hsla(var(--base-h), var(--base-s), 70%, 0.5);
+    --form-bg: hsl(var(--base-h), var(--base-s), 100%);
+    --form-disabled-bg: hsl(var(--base-h), var(--base-s), 90%);
+	
+    width: 100%;
+	max-width: 350px;
+	border-radius: 5px;
+	padding: 2.7rem 1.5rem;
+	display: flex;
+	gap: 1.5rem;
+	flex-direction: column;
+    background-color: var(--form-bg);
+	border: solid 1px var(--form-border);
+    box-shadow: var(--form-shadow) 0px 0px 10px;
+
+	& p {
+		text-align: center;
+		font-size: 0.9rem;
+		margin: 0;
+		color: var(--danger);
+	}
+
+	& a {
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: var(--form-color);
+
+		&:hover {
+			color: var(--form-hover-color);
+		}
+	}
+}
+
+.form-group {
+	position: relative;
+
+	& label {
+		position: absolute;
+		left: 4px;
+		top: 0;
+		transition: transform 200ms;
+		text-transform: uppercase;
+		font-size: 0.9rem;
+		pointer-events: none;
+		color: var(--form-color);
+	}
+
+	& input::placeholder {
+		opacity: 0;
+	}
+
+	& input:focus + label,
+	& input:not(:placeholder-shown) + label {
+		transform: translate(-12px, -80%) scale(0.8);
+		color: var(--primary);
+	}
+
+	& input {
+		background-color: transparent;
+		width: 100%;
+		font-size: 0.9rem;
+		line-height: 1;
+		padding: 4px 4px 4px 12px;
+		border-bottom: solid 1px var(--form-border);
+	
+		&:not([readonly]):focus {
+			outline: none;
+			box-shadow: none;
+			border-bottom: solid 1px var(--primary);
+		}
+	}
+
+	&	input:read-only {
+			background-color: var(--form-disabled-bg);
+			color: var(--form-color);
+			cursor: not-allowed;
+		}
+}
+
+
+
+.form-group p {
+	color: var(--danger);
+	font-size: 0.8rem;
+	text-align: left;
+	margin: 0;
+}
+
+.form-group + .btn {
+	display: block;
+	font-size: 1.15rem;
+}
+
+.select-trigger {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: transparent;
+	width: 100%;
+	font-size: 0.9rem;
+	line-height: 1;
+	padding: 4px 4px 4px 12px;
+    color: var(--form-color);
+	border-bottom: solid 1px var(--form-border);
+	box-sizing: border-box;
+}
+
+.select-content {
+    --form-border: hsl(var(--base-h), var(--base-s), 65%);
+    --form-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+    --form-bg: hsl(var(--base-h), var(--base-s), 95%);
+	width: 250px;
+	overflow: hidden;
+	border-radius: 6px;
+	padding: 0.5rem;
+	border: solid 1px var(--form-border);
+	background-color: var(--form-bg);
+	box-shadow: var(--form-shadow) 0px 0px 10px;
+}
+
+.select-item {
+	font-size: 1rem;
+	line-height: 1;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	padding: 10px 35px 10px 35px;
+	position: relative;
+	user-select: none;
+
+	& .selectItem-indicator {
+		position: absolute;
+		left: 5px;
+		width: 25px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		& svg {
+			width: 13px;
+			height: 13px;
+			fill: var(--primary);
+		}
+	}
+
+	&[data-highlighted] {
+		outline: none;
+		background-color: var(--base-80);
+	}
+}
+
+.checkbox {
+	display: flex;
+	gap: 0.5rem;
+
+	& button {
+		width: 25px;
+		height: 25px;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: solid 1px var(--base-75);
+
+		& svg {
+			width: 18px;
+			height: 18px;
+			fill: var(--base-40);
+		}
+	}
+
+	& button[data-error='true'] {
+		border: solid 1px var(--danger);
+
+		& svg {
+			fill: var(--danger);
+		}
+	}
+}

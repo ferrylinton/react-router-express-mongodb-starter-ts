@@ -39,7 +39,7 @@ export const SearchForm = ({ action }: SearchFormProps) => {
 			autoComplete="off"
 			name="search-form"
 			onSubmit={handleSubmit}
-			className={clsx('search-form-variable', styles['search-form'])}
+			className={styles['search-form']}
 		>
 			<input
 				type="text"

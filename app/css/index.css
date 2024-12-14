@@ -72,51 +72,9 @@ svg {
 	box-shadow: hsla(0, 0%, 0%, 0.4) 0px 0px 6px;
 }
 
-.container-center {
-	padding: 1rem;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.container-center > *:first-child {
-	width: 100%;
-	max-width: 350px;
-	background-color: var(--base);
-	border: solid 1px var(--base-75);
-	border-radius: 5px;
-	padding: 2.7rem 1.5rem;
-}
-
 @media (min-width: 768px) {
 	.container-center > *:first-child {
 		padding: 2.7rem 1.5rem;
-	}
-}
-
-.form {
-	width: 100%;
-	display: flex;
-	gap: 1.5rem;
-	flex-direction: column;
-
-	& p {
-		text-align: center;
-		font-size: 0.9rem;
-		margin: 0;
-		color: var(--danger);
-	}
-
-	& a {
-		font-size: 0.95rem;
-		font-weight: 500;
-		color: var(--base-60);
-
-		&:hover {
-			color: var(--base-40);
-		}
 	}
 }
 

@@ -9,6 +9,7 @@ import i18next from '~/i18n/i18next.server';
 import { RegisterSchema } from '~/validations/authenticate-schema';
 import { getErrorsObject } from '~/validations/validation-util';
 import { Route } from '../+types/root';
+import styles from '~/components/Form/Form.module.css';
 
 
 type ActionData = {
@@ -60,12 +61,12 @@ export default function RegisterRoute() {
 
     return (
         <>
-            <div className="container-center">
+            <div className="h-full flex justify-center items-center">
                 <Form
                     method="post"
                     noValidate
                     autoComplete="off"
-                    className="form"
+                    className={styles["form"]}
                 >
                     {errorMessage && <p>{errorMessage}</p>}
 

@@ -1,5 +1,5 @@
 import { CheckIcon } from '../../icons/CheckIcon';
-import styles from './Checkbox.module.css';
+import styles from './Form.module.css';
 import { useState } from 'react';
 import clsx from 'clsx';
 

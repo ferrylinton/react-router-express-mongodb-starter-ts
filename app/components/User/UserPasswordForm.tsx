@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, useNavigate } from 'react-router';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
+import styles from '~/components/Form/Form.module.css';
 
 
 export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFormProps) => {
@@ -11,12 +12,12 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 
 	return (
 		<>
-			<div className="container-center">
+			<div className="h-full flex justify-center items-center">
 				<Form
 					method="post"
 					noValidate
 					autoComplete="off"
-					className="form"
+					className={styles["form"]}
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 
