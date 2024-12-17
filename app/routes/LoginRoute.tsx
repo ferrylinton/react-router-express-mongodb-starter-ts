@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { data, Form, Link, LoaderFunctionArgs, redirect, useActionData } from 'react-router';
-import { generateToken } from '~/.server/services/auth-service';
-import { commitSession, getUserSession } from '~/.server/utils/sessions';
+import { authenticate } from '~/.server/services/auth-service';
+import { getReturnTo, setLoggedUser } from '~/.server/utils/auth-util';
+import { getUserSession } from '~/.server/utils/sessions';
 import { Button } from '~/components/Button/Button';
+import styles from '~/components/Form/Form.module.css';
 import { InputForm } from '~/components/Form/InputForm';
 import i18next from '~/i18n/i18next.server';
 import { AuthenticateSchema } from '~/validations/authenticate-schema';
 import { getErrorsObject } from '~/validations/validation-util';
 import { Route } from '../+types/root';
-import styles from '~/components/Form/Form.module.css';
 
 type ActionData = {
     errorMessage?: string
@@ -25,7 +26,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 }
 
 export const action = async ({ request }: Route.ActionArgs) => {
-    const session = await getUserSession(request);
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
     const validation = AuthenticateSchema.safeParse(payload);
@@ -33,13 +33,12 @@ export const action = async ({ request }: Route.ActionArgs) => {
     if (validation.success) {
         try {
             const { username, password } = validation.data;
-            const loggedUser = await generateToken(username, password);
+            const loggedUser = await authenticate(username, password);
 
             if (typeof loggedUser === "object") {
-                session.set("loggedUser", loggedUser);
-                return redirect("/", {
+                return redirect(getReturnTo(request), {
                     headers: {
-                        "Set-Cookie": await commitSession(session),
+                        "Set-Cookie": await setLoggedUser(loggedUser),
                     },
                 });
             } else {
@@ -64,7 +63,7 @@ export default function LoginRoute() {
     const [validationError, setValidationError] = useState<ValidationError | undefined>();
 
     useEffect(() => {
-       
+
         if (actionData?.validationError) {
             setValidationError(actionData.validationError);
             setErrorMessage(undefined);

@@ -1,6 +1,5 @@
 import compression from "compression";
 import express from "express";
-import morgan from "morgan";
 import path from "path";
 import * as url from "url";
 import { NODE_ENV, PORT } from "~/.server/config/constant";
@@ -13,7 +12,6 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 const app = express();
 app.use(compression());
 app.disable("x-powered-by");
-app.use(morgan("tiny"));
 
 // PRODUCTION
 app.use(

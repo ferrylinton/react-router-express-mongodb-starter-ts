@@ -1,12 +1,15 @@
-import { data, LoaderFunctionArgs, useLoaderData } from 'react-router';
+import { Suspense, useEffect, useState, useTransition } from 'react';
+import { Await, LoaderFunctionArgs, useLoaderData, useNavigation } from 'react-router';
 import { findUsers } from '~/.server/services/user-service';
-import { authenticate } from '~/.server/utils/auth-util';
+import { isAuthenticated } from '~/.server/utils/auth-util';
+import { SimpleErrorBoundary } from '~/components/SimpleErrorBoundary';
 import { UserTable } from '~/components/User/UserTable';
-import * as cookie from 'cookie';
+import { UserTableSkeleton } from '~/components/User/UserTableSkeleton';
 
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    await authenticate(request, "/user");
+    console.log("loader..................");
+    await isAuthenticated(request, "/user");
 
     const { searchParams } = new URL(request.url);
 
@@ -17,20 +20,30 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         sort: searchParams.get("sort") || undefined,
     }
 
-    const pageable = await findUsers(requestParams);
-    const expires = new Date(
-        new Date().getTime() + 0.3 * 60 * 1000
-    );
-    
+    const pageable = findUsers(requestParams);
 
-    return data({ pageable },{ headers: { "Set-Cookie": cookie.serialize("foo", "bar", {expires}) } },);
+    return { pageable };
 };
 
 export default function UserListRoute() {
 
+    const navigation = useNavigation();
+
     const { pageable } = useLoaderData<typeof loader>();
 
-    return (
-        <UserTable pageable={pageable} />
-    )
+    const [firstLoad, setFirstLoad] = useState(true);
+
+    useEffect(() => {
+        setFirstLoad(false);
+    }, [])
+
+    if (firstLoad || (navigation.state === 'loading' && navigation.location.pathname === "/user")) {
+        return <UserTableSkeleton />;
+    } else {
+        return <Await
+            resolve={pageable}
+            errorElement={<SimpleErrorBoundary />}
+            children={value => <UserTable pageable={value} />}
+        />
+    }
 }

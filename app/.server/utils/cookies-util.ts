@@ -1,9 +1,12 @@
 import * as cookie from 'cookie';
 import i18n from '~/i18n/i18n';
 
+
 export const DEFAULT_THEME = "light";
 
 export const THEME = 'theme';
+
+
 
 export const getCookieTheme = (request: Request) => {
   const cookies = cookie.parse(request.headers.get("Cookie") || "");

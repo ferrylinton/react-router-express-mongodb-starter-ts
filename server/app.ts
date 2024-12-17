@@ -1,4 +1,5 @@
 import { createRequestHandler } from "@react-router/express";
+import cookieParser from 'cookie-parser';
 import express from "express";
 import "react-router";
 import { authMiddleware } from "./middlewares/auth-middleware";
@@ -11,6 +12,7 @@ declare module "react-router" {
 
 export const app = express();
 
+app.use(cookieParser());
 app.use(authMiddleware);
 
 app.use(

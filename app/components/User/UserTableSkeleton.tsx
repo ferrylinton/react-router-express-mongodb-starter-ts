@@ -1,28 +1,33 @@
-import { FormattedMessage } from 'react-intl';
-import { SearchForm } from '../SearchForm/SearchForm';
-import { SkeletonSquare } from '../Skeleton/SkeletonSquare';
-import styles from '../../assets/css/DataList.module.css';
+import { useTranslation } from "react-i18next";
+import { SearchForm } from "../SearchForm/SearchForm";
+import styles from '../../css/DataList.module.css';
+import { SkeletonSquare } from "../Skeleton/SkeletonSquare";
+
+
 
 export const UserTableSkeleton = () => {
+
+	const { t } = useTranslation();
+
 	return (
 		<>
-			<div className={styles['data-toolbar']}>
+			<div className="mt-8 mb-4">
 				<SearchForm action="/user" />
 			</div>
 			<div className={styles['data-list']}>
 				<div table-type="data">
 					<table>
-						<thead>
+					<thead>
 							<tr>
 								<th>#</th>
 								<th>
-									<FormattedMessage id="username" />
+									{t("username")}
 								</th>
 								<th>
-									<FormattedMessage id="email" />
+									{t("email")}
 								</th>
 								<th>
-									<FormattedMessage id="createdAt" />
+									{t("createdAt")}
 								</th>
 							</tr>
 						</thead>

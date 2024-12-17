@@ -7,14 +7,7 @@ import { envOnlyMacros } from "vite-env-only"
 
 export default defineConfig((config) => {
 
-  console.log(config);
-
   return {
-    // esbuild: {
-    //   supported: {
-    //     'top-level-await': true
-    //   },
-    // },
     build: {
       rollupOptions: config.isSsrBuild
         ? {

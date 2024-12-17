@@ -9,7 +9,7 @@ import { UserTableItem } from './UserTableItem';
 import { useNavigate, useSubmit } from 'react-router';
 
 type UserTableProps = {
-	pageable: Pageable<Omit<User, 'password'>>;
+	pageable?: Pageable<Omit<User, 'password'>>;
 };
 
 export const UserTable = ({ pageable }: UserTableProps) => {
@@ -56,82 +56,85 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 		);
 	};
 
-	return (
-		<>
-			<div className="mt-8 mb-4">
-				<SearchForm action="/user" />
-			</div>
-			<div className={styles['data-list']}>
-				<div table-type="data">
-					<table>
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>
-									{t("username")}
-								</th>
-								<th>
-									{t("email")}
-								</th>
-								<th>
-									{t("createdAt")}
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{pageable.pagination.total === 0 && (
-								<tr>
-									<td colSpan={4}>
-										<div className="no-records">
-											{t("noRecords")}
-										</div>
-									</td>
-								</tr>
-							)}
-							{pageable.data.map((user, index) => {
-								return (
-									<UserTableItem
-										key={index}
-										index={
-											pageable.pagination.page * pageable.pagination.pageSize +
-											index +
-											1
-										}
-										user={user}
-									/>
-								);
-							})}
-						</tbody>
-					</table>
+	if(pageable){
+		return (
+			<>
+				<div className="mt-8 mb-4">
+					<SearchForm action="/user" />
 				</div>
-				<div table-type="action">
-					<table>
-						<thead>
-							<tr>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							{pageable.data.map((user, index) => {
-								return (
-									<tr key={index}>
-										<td>
-											<UserPopMenu
-												locked={user.locked}
-												toUpdate={() => toUpdate(user.id)}
-												toDetail={() => toDetail(user.id)}
-												toPassword={() => toPassword(user.id)}
-												toggleLockUser={() => toggleLockUser(user)}
-											/>
+				<div className={styles['data-list']}>
+					<div table-type="data">
+						<table>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>
+										{t("username")}
+									</th>
+									<th>
+										{t("email")}
+									</th>
+									<th>
+										{t("createdAt")}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								{pageable.pagination.total === 0 && (
+									<tr>
+										<td colSpan={4}>
+											<div className="no-records">
+												{t("noRecords")}
+											</div>
 										</td>
 									</tr>
-								);
-							})}
-						</tbody>
-					</table>
+								)}
+								{pageable.data.map((user, index) => {
+									return (
+										<UserTableItem
+											key={index}
+											index={
+												pageable.pagination.page * pageable.pagination.pageSize +
+												index +
+												1
+											}
+											user={user}
+										/>
+									);
+								})}
+							</tbody>
+						</table>
+					</div>
+					<div table-type="action">
+						<table>
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								{pageable.data.map((user, index) => {
+									return (
+										<tr key={index}>
+											<td>
+												<UserPopMenu
+													locked={user.locked}
+													toUpdate={() => toUpdate(user.id)}
+													toDetail={() => toDetail(user.id)}
+													toPassword={() => toPassword(user.id)}
+													toggleLockUser={() => toggleLockUser(user)}
+												/>
+											</td>
+										</tr>
+									);
+								})}
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-			<Pager pagination={pageable.pagination} />
-		</>
-	);
+				<Pager pagination={pageable.pagination} />
+			</>
+		);
+	}
+	
 };

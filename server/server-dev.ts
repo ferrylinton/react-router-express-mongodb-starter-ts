@@ -1,6 +1,5 @@
 import compression from "compression";
 import express from "express";
-import morgan from "morgan";
 import { NODE_ENV, PORT } from "~/.server/config/constant";
 import logger from "~/.server/config/winston";
 import { initDb } from "~/.server/db/create-collections";
@@ -9,7 +8,6 @@ const app = express();
 
 app.use(compression());
 app.disable("x-powered-by");
-app.use(morgan("tiny"));
 
 // DEVELOPMENT
 const viteDevServer = await import("vite").then((vite) =>

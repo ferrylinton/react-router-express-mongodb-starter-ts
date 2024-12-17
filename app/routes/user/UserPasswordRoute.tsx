@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ActionFunctionArgs, data, LoaderFunctionArgs, useActionData, useLoaderData } from 'react-router';
 import { changePassword, findUserById } from '~/.server/services/user-service';
-import { authenticate } from '~/.server/utils/auth-util';
+import { isAuthenticated } from '~/.server/utils/auth-util';
 import { toast } from '~/.server/utils/message-util';
 import { UserPasswordForm } from '~/components/User/UserPasswordForm';
 import i18next from '~/i18n/i18next.server';
@@ -10,13 +10,13 @@ import { getErrorsObject } from '~/validations/validation-util';
 
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-    await authenticate(request, `/user/password/${params.id}`)
+    await isAuthenticated(request, `/user/password/${params.id}`)
     const user = await findUserById(params.id || "0")
     return data(user);
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-    const loggedUser = await authenticate(request, `/user/password/${params.id}`)
+    const loggedUser = await isAuthenticated(request, `/user/password/${params.id}`)
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
     const validation = ChangePasswordSchema.safeParse(payload);
