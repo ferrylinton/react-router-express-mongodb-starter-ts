@@ -18,12 +18,10 @@ type Pageable<T> = {
 	data: Array<T>;
 	pagination: Pagination;
 	keyword?: string;
-	column?: string;
 	sort?: string;
 };
 
 type RequestParams = {
-	column?: string;
 	keyword?: string;
 	page?: number;
 	sort?: string;

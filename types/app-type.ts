@@ -11,7 +11,7 @@ type ToastType = "success" | "error"
 
 type ToastData = { 
 	message: string
-	type: ToastType 
+	type: ToastType
 }
 
 type ToastContextProps = {

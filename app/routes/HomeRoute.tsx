@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { data } from "react-router";
-import { getUserSession } from "~/.server/utils/sessions";
+import { isAuthenticated } from "~/.server/utils/auth-util";
 import { Route } from "../+types/root";
 
 export function meta({ }: Route.MetaArgs) {
@@ -10,8 +10,8 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export async function loader({ context, request }: Route.LoaderArgs) {
-  const session = await getUserSession(request);
+export async function loader({ request }: Route.LoaderArgs) {
+  await isAuthenticated(request);
 
   return data(
     { message: "hello" }

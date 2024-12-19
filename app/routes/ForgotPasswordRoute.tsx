@@ -36,7 +36,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 				const { insertedId: token } = await createPasswordToken(username);
 				const html = generateMail(`${HOST}/resetpassword?token=${token}`);
 				await sendMail(email, html);
-				return await toast(request, t("emailSent"), "/forgotpassword");
+				return await toast(t("emailSent"), "/forgotpassword");
 			} else {
 				return data({ errorMessage: t('emailNotFound') });
 			}

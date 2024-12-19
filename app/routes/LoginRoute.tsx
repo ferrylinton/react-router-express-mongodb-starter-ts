@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { data, Form, Link, LoaderFunctionArgs, redirect, useActionData } from 'react-router';
+import { data, Form, Link, LoaderFunctionArgs, redirect, useActionData, useNavigation, useSubmit } from 'react-router';
 import { authenticate } from '~/.server/services/auth-service';
-import { getReturnTo, setLoggedUser } from '~/.server/utils/auth-util';
-import { getUserSession } from '~/.server/utils/sessions';
+import { getLoggedUser, getReturnTo, setLoggedUser } from '~/.server/utils/auth-util';
+
 import { Button } from '~/components/Button/Button';
 import styles from '~/components/Form/Form.module.css';
 import { InputForm } from '~/components/Form/InputForm';
@@ -11,6 +11,7 @@ import i18next from '~/i18n/i18next.server';
 import { AuthenticateSchema } from '~/validations/authenticate-schema';
 import { getErrorsObject } from '~/validations/validation-util';
 import { Route } from '../+types/root';
+import { LoaderIcon } from '~/icons/LoaderIcon';
 
 type ActionData = {
     errorMessage?: string
@@ -18,14 +19,16 @@ type ActionData = {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    const session = await getUserSession(request);
+    const loggedUser = await getLoggedUser(request);
 
-    if (session.has('loggedUser')) {
+    if (loggedUser) {
         return redirect("/");
     }
 }
 
 export const action = async ({ request }: Route.ActionArgs) => {
+    console.log("login ", new Date().toUTCString());
+    await new Promise(r => setTimeout(r, 2000));
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
     const validation = AuthenticateSchema.safeParse(payload);
@@ -56,11 +59,23 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function LoginRoute() {
     const { t } = useTranslation();
 
+    const submit = useSubmit();
+
+    const navigation = useNavigation();
+
     const actionData = useActionData<ActionData>();
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
     const [validationError, setValidationError] = useState<ValidationError | undefined>();
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        if(navigation.formAction !== "/login"){
+            submit(event.currentTarget);
+        }
+    }
 
     useEffect(() => {
 
@@ -79,7 +94,9 @@ export default function LoginRoute() {
         <>
             <div className="h-full flex justify-center items-center">
                 <Form
+                    action="/login"
                     method="post"
+                    onSubmit={handleSubmit}
                     noValidate
                     autoComplete="off"
                     className={styles["form"]}
@@ -101,8 +118,8 @@ export default function LoginRoute() {
                     />
 
                     <Button type="submit" variant="primary" size="big">
-                        {t("login")}
-                    </Button>
+						{navigation.formAction === "/login" ? <LoaderIcon /> : t("login")}
+					</Button>
 
                     <div className="flex justify-between uppercase">
                         <Link to="/register">

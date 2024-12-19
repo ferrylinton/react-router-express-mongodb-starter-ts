@@ -1,22 +1,29 @@
 :global(.dark){
 	.data-list{
-		--data-list-bg: hsl(var(--base-h), var(--base-s), 25%);
-		--truncate-bg: hsl(var(--base-h), var(--base-s), 22%);
+		--table-bg: hsl(var(--base-h), var(--base-s), 25%);
+		--table-border: hsl(var(--base-h), var(--base-s), 35%);
+		--table-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
+		--td-odd-even: hsl(var(--base-h), var(--base-s), 24%);
 		--th-bg: hsl(var(--base-h), var(--base-s), 22%);
 		--td-border: hsl(var(--base-h), var(--base-s), 30%);
+		--truncate-bg: hsl(var(--base-h), var(--base-s), 22%);
 	}
 }
 
 .data-list {
-	--data-list-bg: hsl(var(--base-h), var(--base-s), 100%);
-	--truncate-bg: hsl(var(--base-h), var(--base-s), 90%);
+	--table-bg: hsl(var(--base-h), var(--base-s), 100%);
+	--table-border: hsl(var(--base-h), var(--base-s), 80%);
+	--table-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--td-odd-even: hsl(var(--base-h), var(--base-s), 96%);
 	--th-bg: hsl(var(--base-h), var(--base-s), 80%);
 	--td-border: hsl(var(--base-h), var(--base-s), 90%);
+	--truncate-bg: hsl(var(--base-h), var(--base-s), 90%);
 
-	background-color: var(--data-list-bg);
-	border-radius: 0.5em;
+	background-color: var(--table-bg);
+	border: solid 1px var(--table-border);
+	border-radius: 0.3em;
 	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 50px;
+	box-shadow: var(--table-shadow) 0px 0px 10px;
 	display: flex;
 
 	& [text-truncate='true'] {
@@ -49,6 +56,7 @@
 			font-size: 0.9rem;
 			font-weight: bold;
 			background-color: var(--th-bg);
+			border-bottom: solid 1px var(--table-border);
 		}
 
 		& tbody td {
@@ -63,12 +71,8 @@
 			border-bottom: solid 1px var(--td-border);
 		}
 
-		& tr:nth-child(odd) {
-			background-color: var(--base-90);
-		}
-
 		& tr:nth-child(even) {
-			background-color: var(--base-95);
+			background-color: var(--td-odd-even);
 		}
 
 		& [data-locked='true'] {
@@ -95,10 +99,7 @@
 
 	& [table-type='action'] {
 		width: 45px;
-		overflow-x: scroll;
-		overflow-y: hidden;
-		overflow: hidden;
-
+		
 		& table {
 			width: 100%;
 
@@ -122,7 +123,7 @@
 			}
 
 			& tr:has([data-state='open']) {
-				color: var(--base-30);
+				color: var(--primary);
 			}
 		}
 	}

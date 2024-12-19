@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   data,
@@ -10,16 +10,21 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigate,
   useRouteLoaderData,
 } from "react-router";
 import { useChangeLanguage } from "remix-i18next/react";
 import type { Route } from "./+types/root";
 import { getCookieTheme } from "./.server/utils/cookies-util";
-import { commitSession, getUserSession } from "./.server/utils/sessions";
 import stylesheet from "./css/index.css?url";
 import i18next from "./i18n/i18next.server";
 import { AppProvider } from "./providers/AppProvider";
 import { ToastProvider, useToastContext } from "./providers/ToastProvider";
+import { getToastData, removeToastData } from "./.server/utils/message-util";
+import styles from "./components/Layout/Layout.module.css"
+import { PublicNavbar } from "./components/Navbar/PublicNavbar";
+import { Button } from "./components/Button/Button";
+import Cookies from "js-cookie";
 
 
 export const links: Route.LinksFunction = () => [
@@ -42,13 +47,12 @@ export const links: Route.LinksFunction = () => [
 
 export async function loader({ request }: Route.LoaderArgs) {
   const locale = await i18next.getLocale(request);
-  const session = await getUserSession(request);
   const theme = getCookieTheme(request);
-  const toastData = session.get("toastData");
+  const toastData = getToastData(request);
 
   return data(
     { locale, theme, toastData },
-    { headers: { "Set-Cookie": await commitSession(session) } },
+    { headers: { "Set-Cookie": removeToastData() } },
   );
 }
 
@@ -61,12 +65,20 @@ export let handle = {
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
   const loaderData = useRouteLoaderData<typeof loader>("root");
-  const locale = loaderData?.locale || "id";
-  const theme = loaderData?.theme || "light";
- 
+  const [locale, setLocale] = useState(loaderData?.locale || "id");
+  const [theme, setTheme] = useState(loaderData?.theme || "light")
   const { i18n } = useTranslation();
 
+  useEffect(() => {
+
+    if (!loaderData) {
+      setLocale(Cookies.get("locale") || "id");
+      setTheme(Cookies.get("theme") || "light");
+    }
+
+  }, [])
 
   // This hook will change the i18n instance language to the current locale
   // detected by the loader, this way, when we do something to change the
@@ -102,7 +114,6 @@ export default function App() {
   const { toast } = useToastContext();
 
   useEffect(() => {
-
     if (loaderData?.toastData) {
       toast(loaderData?.toastData);
     }
@@ -115,6 +126,8 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack: string | undefined;
@@ -123,7 +136,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     message = error.status === 404 ? "404" : "Error";
     details =
       error.status === 404
-        ? "The requested page could not be found."
+        ? t("pageNotFound")
         : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
@@ -131,14 +144,20 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <div className={clsx(styles.layout, 'flex-col',)}>
+      <PublicNavbar />
+      <main className="h-full flex flex-col justify-center items-center p-4 gap-4">
+        <h1 className="text-7xl font-bold">{message}</h1>
+        <p className="text-center">{details}</p>
+        {stack && (
+          <pre className="stack">
+            <code>{stack}</code>
+          </pre>
+        )}
+        <Button type="submit" variant="primary" minWidth={120} onClick={() => navigate("/", { replace: true })}>
+          {t("home")}
+        </Button>
+      </main>
+    </div>
   );
 }

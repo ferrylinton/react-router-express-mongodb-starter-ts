@@ -42,7 +42,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
                 };
 
                 await changePassword(input);
-                return await toast(request, t("dataIsSaved", { arg: passwordToken.username }), "/login");
+                return await toast(t("dataIsSaved", { arg: passwordToken.username }), "/login");
             } else {
                 return data({ errorMessage: t("invalidToken") });
             }

@@ -35,7 +35,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             }
 
             await updateUser(input);
-            return await toast(request, t("dataIsUpdated", { arg: validation.data.username }), "/user");
+            return await toast(t("dataIsUpdated", { arg: validation.data.username }), "/user");
         } catch (error: any) {
             return data({ errorMessage: error.message });
         }

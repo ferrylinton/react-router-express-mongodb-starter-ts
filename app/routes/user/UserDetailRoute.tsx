@@ -1,6 +1,7 @@
 import { ActionFunctionArgs, data, LoaderFunctionArgs, useLoaderData } from 'react-router';
 import { deleteUserById, findUserById } from '~/.server/services/user-service';
 import { toast } from '~/.server/utils/message-util';
+import { DataNotFound } from '~/components/DataNotFound/DataNotFound';
 import { UserDetail } from '~/components/User/UserDetail';
 import i18next from '~/i18n/i18next.server';
 
@@ -17,7 +18,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
     try {
         await deleteUserById(params.id || "0");
-        return await toast(request, t("dataIsDeleted", { arg: username }), "/user");
+        return await toast(t("dataIsDeleted", { arg: username }), "/user");
     } catch (error: any) {
         return data({ errorMessage: error.message });
     }
@@ -27,7 +28,10 @@ export default function UserDetailRoute() {
 
     const user = useLoaderData<typeof loader>();
 
-    return (
-        <UserDetail user={user} />
-    )
+    if(user){
+        return <UserDetail user={user} />
+    }else{
+        return <DataNotFound/>
+    }
+    
 }

@@ -74,5 +74,6 @@
 	"emailSent": "Email sent",
 	"profile": "Profil",
 	"user": "User",
-	"list": "List"
+	"list": "List",
+	"pageNotFound": "The requested page could not be found"
 }

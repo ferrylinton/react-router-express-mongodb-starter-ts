@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Form, useNavigate } from 'react-router';
+import { Form, useNavigate, useNavigation } from 'react-router';
 import { Button } from '../Button/Button';
 import { InputForm } from '../Form/InputForm';
 import styles from '~/components/Form/Form.module.css';
+import { LoaderIcon } from '~/icons/LoaderIcon';
 
 
 export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFormProps) => {
@@ -10,10 +11,15 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 
 	const navigate = useNavigate();
 
+	const navigation = useNavigation();
+
+	const action = `/user/password/${user.id}`
+
 	return (
 		<>
 			<div className="h-full flex justify-center items-center">
 				<Form
+					action={action}
 					method="post"
 					noValidate
 					autoComplete="off"
@@ -52,7 +58,7 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 							{t("back")}
 						</Button>
 						<Button type="submit" variant="primary" size="big">
-							{t("update")}
+							{navigation.formAction === action ? <LoaderIcon /> : t("update")}
 						</Button>
 					</div>
 				</Form>

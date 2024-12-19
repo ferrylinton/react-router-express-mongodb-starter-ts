@@ -15,7 +15,7 @@ const main = async () => {
 			password: 'password',
 			role: 'ADMIN',
 		};
-		logger.info(JSON.stringify(await userService.create(admin)));
+		logger.info(JSON.stringify(await userService.createUser(admin)));
 
 		const user: CreateUser = {
 			username: 'user',
@@ -23,7 +23,7 @@ const main = async () => {
 			password: 'password',
 			role: 'USER',
 		};
-		logger.info(JSON.stringify(await userService.create(user)));
+		logger.info(JSON.stringify(await userService.createUser(user)));
 
 		for (let i = 0; i < 100; i++) {
 			try {
@@ -34,7 +34,7 @@ const main = async () => {
 					role: i % 2 === 0 ? 'ADMIN' : 'USER',
 				};
 
-				const result = await userService.create(user);
+				const result = await userService.createUser(user);
 				logger.info(JSON.stringify(result));
 			} catch (error) {
 				console.log(error);

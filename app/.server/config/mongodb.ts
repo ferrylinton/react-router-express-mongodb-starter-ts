@@ -47,15 +47,15 @@ const log = (event: ConnectionPoolMonitoringEvent) => {
 const getMongoClientInstance = () => {
 	const instance = new MongoClient(MONGODB_URL, mongoClientOptions);
 
-	instance.on('connectionPoolCreated', log);
+	//instance.on('connectionPoolCreated', log);
 
 	instance.on('connectionPoolReady', log);
 
-	instance.on('connectionCreated', log);
+	//instance.on('connectionCreated', log);
 
-	instance.on('connectionClosed', log);
+	//instance.on('connectionClosed', log);
 
-	instance.on('commandStarted', log);
+	//instance.on('commandStarted', log);
 
 	return instance;
 };

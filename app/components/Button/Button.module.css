@@ -32,13 +32,19 @@
 	align-items: center;
 	text-align: center;
 	text-transform: uppercase;
+	min-height: 40px;
 	font-size: 0.9rem;
-	padding: 0.5rem;
 	border-radius: 0.2rem;
+	letter-spacing: 1px;
 	color: var(--btn-color);
 	border: solid 1px var(--btn-border);
 	background-color: var(--btn-bg);
 	box-shadow: var(--btn-shadow) 0 5px 10px -5px;
+
+	& svg[role=loader] {
+		height: 100%;
+		width: auto;
+	}
 }
 
 .btn:hover {
@@ -85,13 +91,13 @@
 }
 
 .btn-big {
-	height: 45px;
-	font-size: 1.1rem;
+	height: 50px;
+	font-size: 1rem;
+	font-weight: bold;
 }
 
 .btn-small {
 	font-size: 0.9rem;
-	padding: 0.5rem 0;
 
 	& svg {
 		width: 18px;

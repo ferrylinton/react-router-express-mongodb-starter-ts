@@ -8,10 +8,6 @@ export const DEFAULT_THEME = "light";
 
 export const THEME = 'theme';
 
-const expires = new Date(
-	new Date().getTime() + 1 * 10 * 1000
-);
-
 export const ThemeSwitcher = () => {
 
 	const [theme, setTheme] = useState<Theme>(Cookies.get(THEME) as Theme || DEFAULT_THEME);
@@ -31,7 +27,7 @@ export const ThemeSwitcher = () => {
 	const toggleTheme = () => {
 		const newTheme = (theme === 'dark') ? "light" : "dark";
 		setTheme(newTheme);
-		Cookies.set(THEME, newTheme, { expires });
+		Cookies.set(THEME, newTheme, { path: "/" });
 		setThemeClassname(newTheme);
 	};
 

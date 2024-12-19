@@ -1,10 +1,12 @@
-import clsx from 'clsx';
-import { useConfirmStore } from '../../hooks/confirm-store';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
-import styles from './ConfirmDialog.module.css';
+import { useTranslation } from 'react-i18next';
+import { useConfirmStore } from '../../hooks/confirm-store';
 import { Button } from '../Button/Button';
+import styles from './ConfirmDialog.module.css';
 
 export const ConfirmDialog = () => {
+
+	const { t } = useTranslation();
 	const { message, show, hideConfirm, okHandler } = useConfirmStore();
 
 	return (
@@ -17,12 +19,12 @@ export const ConfirmDialog = () => {
 					<section>
 						<AlertDialog.Cancel asChild>
 							<Button variant="secondary">
-								Cancel
+								{t("cancel")}
 							</Button>
 						</AlertDialog.Cancel>
 						<AlertDialog.Action asChild>
 							<Button variant="primary" onClick={() => okHandler()}>
-								OK
+								{t("ok")}
 							</Button>
 						</AlertDialog.Action>
 					</section>

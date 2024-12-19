@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import { Await, LoaderFunctionArgs, useLoaderData, useNavigation } from 'react-router';
 import { findUsers } from '~/.server/services/user-service';
 import { isAuthenticated } from '~/.server/utils/auth-util';
@@ -8,13 +8,11 @@ import { UserTableSkeleton } from '~/components/User/UserTableSkeleton';
 
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    console.log("loader..................");
     await isAuthenticated(request, "/user");
 
     const { searchParams } = new URL(request.url);
 
     const requestParams: RequestParams = {
-        column: searchParams.get("column") || undefined,
         keyword: searchParams.get("keyword") || undefined,
         page: parseInt(searchParams.get("page") || "0"),
         sort: searchParams.get("sort") || undefined,

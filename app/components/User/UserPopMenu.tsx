@@ -12,7 +12,7 @@ type Props = {
 	toggleLockUser: () => void;
 };
 
-export const UserPopMenu = ({ locked, toDetail, toUpdate, toPassword, toggleLockUser }: Props) => {
+export const UserPopMenu = (props: Props) => {
 
 	const { t } = useTranslation();
 
@@ -31,16 +31,16 @@ export const UserPopMenu = ({ locked, toDetail, toUpdate, toPassword, toggleLock
 					align="start"
 				>
 					<section>
-						<button onClick={() => toggleLockUser()}>
-							{t(locked ? 'unlock' : 'lock')}
+						<button onClick={() => props.toggleLockUser()}>
+							{t(props.locked ? 'unlock' : 'lock')}
 						</button>
-						<button onClick={() => toDetail()}>
+						<button onClick={() => props.toDetail()}>
 							{t("detail")}
 						</button>
-						<button onClick={() => toUpdate()}>
+						<button onClick={() => props.toUpdate()}>
 							{t("modify")}
 						</button>
-						<button onClick={() => toPassword()}>
+						<button onClick={() => props.toPassword()}>
 							{t("password")}
 						</button>
 					</section>

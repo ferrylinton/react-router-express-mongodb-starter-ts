@@ -13,6 +13,7 @@ export const loader = async ({request }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+    await new Promise(r => setTimeout(r, 2000));
     const loggedUser = await isAuthenticated(request, "/user/create");
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
@@ -22,7 +23,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         try {
             const { passwordConfirm, ...input } = validation.data;
             await createUser(input, loggedUser.username);
-            return await toast(request, t("dataIsSaved", { arg: validation.data.username }), "/user");
+            return await toast(t("dataIsSaved", { arg: validation.data.username }), "/user");
 
         } catch (error: any) {
             return data({ errorMessage: error.message });

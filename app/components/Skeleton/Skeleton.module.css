@@ -1,3 +1,11 @@
+:global(.dark){
+	.skeleton-line,
+	.skeleton-square {
+		--skeleton1: hsl(var(--base-h), var(--base-s), 35%);
+		--skeleton2: hsl(var(--base-h), var(--base-s), 28%);
+	}
+}
+
 .skeleton-line,
 .skeleton-square {
 	--skeleton1: hsl(var(--base-h), var(--base-s), 90%);

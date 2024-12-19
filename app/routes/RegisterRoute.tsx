@@ -27,7 +27,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
         try {
             const { passwordConfirm, ...input } = validation.data;
             await createUser({ ...input, role: 'USER' });
-            return await toast(request, t("dataIsSaved", { arg: validation.data.username }), "/register");
+            return await toast(t("dataIsSaved", { arg: validation.data.username }), "/register");
 
         } catch (error: any) {
             return data({ errorMessage: error.message });

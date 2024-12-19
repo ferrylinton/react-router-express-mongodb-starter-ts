@@ -115,15 +115,30 @@
 	font-size: 0.9rem;
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
-    color: var(--form-color);
+    color: var(--body-color);
 	border-bottom: solid 1px var(--form-border);
 	box-sizing: border-box;
+
+	& span:last-child{
+		color:  var(--form-color);
+	}
+}
+
+:global(.dark){
+	.select-content{
+		--form-border: hsl(var(--base-h), var(--base-s), 45%);
+        --form-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
+        --form-bg: hsl(var(--base-h), var(--base-s), 30%);
+		--form-hover-bg: hsl(var(--base-h), var(--base-s), 25%);
+	}
 }
 
 .select-content {
     --form-border: hsl(var(--base-h), var(--base-s), 65%);
     --form-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
     --form-bg: hsl(var(--base-h), var(--base-s), 95%);
+	--form-hover-bg: hsl(var(--base-h), var(--base-s), 90%);
+
 	width: 250px;
 	overflow: hidden;
 	border-radius: 6px;
@@ -160,7 +175,11 @@
 
 	&[data-highlighted] {
 		outline: none;
-		background-color: var(--base-80);
+	}
+
+	&:hover {
+		color: var(--primary);
+		background-color: var(--form-hover-bg);
 	}
 }
 
@@ -175,12 +194,12 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border: solid 1px var(--base-75);
+		border: solid 1px var(--form-border);
 
 		& svg {
 			width: 18px;
 			height: 18px;
-			fill: var(--base-40);
+			fill: var(--primary);
 		}
 	}
 

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ActionFunctionArgs, data, LoaderFunctionArgs, useActionData, useLoaderData } from 'react-router';
 import { changePassword, findUserById } from '~/.server/services/user-service';
 import { isAuthenticated } from '~/.server/utils/auth-util';
 import { toast } from '~/.server/utils/message-util';
+import { DataNotFound } from '~/components/DataNotFound/DataNotFound';
 import { UserPasswordForm } from '~/components/User/UserPasswordForm';
 import i18next from '~/i18n/i18next.server';
 import { ChangePasswordSchema } from '~/validations/user-validation';
@@ -16,6 +18,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
+    await new Promise(r => setTimeout(r, 2000));
     const loggedUser = await isAuthenticated(request, `/user/password/${params.id}`)
     const t = await i18next.getFixedT(request);
     const payload = Object.fromEntries(await request.formData());
@@ -24,19 +27,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     if (validation.success) {
         try {
             const { username, password } = validation.data;
-			const input = {
-				username,
-				password,
-				updatedBy: validation.data.username,
-				updatedAt: new Date(),
-			};
+            const input = {
+                username,
+                password,
+                updatedBy: validation.data.username,
+                updatedAt: new Date(),
+            };
 
-			if (loggedUser.username !== input.updatedBy) {
-				input.updatedBy = loggedUser.username;
-			}
+            if (loggedUser.username !== input.updatedBy) {
+                input.updatedBy = loggedUser.username;
+            }
 
             await changePassword(input);
-            return await toast(request, t("dataIsUpdated", { arg: validation.data.username }), "/user");
+            return await toast(t("dataIsUpdated", { arg: validation.data.username }), "/user");
         } catch (error: any) {
             return data({ errorMessage: error.message });
         }
@@ -47,6 +50,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 
 export default function UserPasswordRoute() {
+
+    const { t } = useTranslation();
 
     const user = useLoaderData<Omit<User, "password"> | undefined>();
 
@@ -70,17 +75,15 @@ export default function UserPasswordRoute() {
 
     }, [actionData]);
 
-    if(user){
+    if (user) {
         return (
             <UserPasswordForm
                 user={user}
                 errorMessage={errorMessage}
                 validationError={validationError} />
         )
-    }else{
-        return (
-            <div>Not found</div>
-        )
+    } else {
+        return <DataNotFound/>
     }
-    
+
 }

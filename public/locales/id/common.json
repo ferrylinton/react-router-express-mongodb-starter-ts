@@ -74,5 +74,6 @@
 	"emailSent": "Email sudah dikirim",
 	"profile": "Profile",
 	"user": "Pengguna",
-	"list": "Daftar"
+	"list": "Daftar",
+	"pageNotFound": "Halaman tidak ditemukan"
 }

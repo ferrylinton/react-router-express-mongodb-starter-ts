@@ -6,8 +6,6 @@ export const DEFAULT_THEME = "light";
 
 export const THEME = 'theme';
 
-
-
 export const getCookieTheme = (request: Request) => {
   const cookies = cookie.parse(request.headers.get("Cookie") || "");
   return cookies.theme || DEFAULT_THEME;

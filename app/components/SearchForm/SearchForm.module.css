@@ -1,14 +1,16 @@
 :global(.dark){
 	.search-form{
 		--search-bg: hsl(var(--base-h), var(--base-s), 28%);
-		--button-bg: hsl(var(--base-h), var(--base-s), 22%);
+		--search-border: hsl(var(--base-h), var(--base-s), 40%);
+		--button-bg: hsl(var(--base-h), var(--base-s), 26%);
 		--button-color: hsl(var(--base-h), var(--base-s), 38%);
 	}
 }
 
 .search-form {
 	--search-bg: hsl(var(--base-h), var(--base-s), 100%);
-	--button-bg: hsl(var(--base-h), var(--base-s), 80%);
+	--search-border: hsl(var(--base-h), var(--base-s), 80%);
+	--button-bg: hsl(var(--base-h), var(--base-s), 90%);
 	--button-color: hsl(var(--base-h), var(--base-s), 60%);
 
 	width: 100%;
@@ -16,7 +18,7 @@
 	flex-wrap: nowrap;
 	border-radius: 0.3rem;
 	overflow: hidden;
-	border: solid 1px var(--button-bg);
+	border: solid 1px var(--search-border);
 	background-color: var(--search-bg);
 
 	&:focus-within {

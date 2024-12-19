@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import { getSort, PAGE_SIZE } from '../utils/pager-util';
 import logger from '../config/winston';
 
-export const findUsers = async ({ page, column, keyword, sort }: RequestParams) => {
+export const findUsers = async ({ page, keyword, sort }: RequestParams) => {
 	await new Promise(r => setTimeout(r, 2000));
 	sort = sort || 'createdAt,desc';
 	const userCollection = await getCollection<User>(USER_COLLECTION);
@@ -17,7 +17,7 @@ export const findUsers = async ({ page, column, keyword, sort }: RequestParams) 
 		},
 		{
 			$project: {
-				content: 0,
+				password: 0,
 			},
 		},
 		{
@@ -45,35 +45,16 @@ export const findUsers = async ({ page, column, keyword, sort }: RequestParams) 
 		},
 	];
 
-	if (column && keyword) {
-		const regex = new RegExp(keyword, 'i');
-		pipeline[0]['$match'] = {
-			$and: [
-				{
-					columns: { $in: [column] },
-				},
-				{
-					$or: [{ username: regex }, { email: regex }],
-				},
-			],
-		};
-
-		logger.info('find : ' + JSON.stringify(pipeline).replaceAll('{}', regex.toString()));
-	} else if (!column && keyword) {
+	if (keyword) {
 		const regex = new RegExp(keyword, 'i');
 		pipeline[0]['$match'] = {
 			$or: [{ username: regex }, { email: regex }],
 		};
 
 		logger.info('find : ' + JSON.stringify(pipeline).replaceAll('{}', regex.toString()));
-	} else if (column && !keyword) {
-		pipeline[0]['$match'] = {
-			columns: { $in: [column] },
-		};
-		logger.info('find : ' + JSON.stringify(pipeline));
 	} else {
 		pipeline.shift();
-		logger.info('POST.find : ' + JSON.stringify(pipeline));
+		logger.info('find : ' + JSON.stringify(pipeline));
 	}
 
 	const arr = await userCollection.aggregate<Pageable<WithId<User>>>(pipeline).toArray();
@@ -87,8 +68,7 @@ export const findUsers = async ({ page, column, keyword, sort }: RequestParams) 
 			pageSize: PAGE_SIZE,
 		},
 		sort,
-		keyword,
-		column,
+		keyword
 	};
 
 	if (arr.length) {
