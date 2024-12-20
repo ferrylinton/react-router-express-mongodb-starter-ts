@@ -1,5 +1,6 @@
 {
 	"name": "react-router-express-mongodb-starter-ts",
+	"description": "React Router 7 + Mongodb starter (with typescript)",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
