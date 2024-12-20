@@ -6,7 +6,6 @@ import { Form, useNavigation } from 'react-router';
 import styles from '~/components/Form/Form.module.css';
 import { LoaderIcon } from '~/icons/LoaderIcon';
 
-
 export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<UserFormProps>) => {
 	const { t } = useTranslation();
 
@@ -20,7 +19,7 @@ export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<
 					method="post"
 					noValidate
 					autoComplete="off"
-					className={styles["form"]}
+					className={styles['form']}
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 
@@ -56,7 +55,7 @@ export const UserCreateForm = ({ user, validationError, errorMessage }: Partial<
 					<SelectRole />
 
 					<Button type="submit" variant="primary" size="big">
-						{navigation.formAction === "/user/create" ? <LoaderIcon /> : t("create")}
+						{navigation.formAction === '/user/create' ? <LoaderIcon /> : t('create')}
 					</Button>
 				</Form>
 			</div>

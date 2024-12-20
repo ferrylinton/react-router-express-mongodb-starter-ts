@@ -10,15 +10,14 @@ import styles from './Dropdown.module.css';
 import Cookies from 'js-cookie';
 
 export const LanguageMenu = () => {
-
-	let { i18n } = useTranslation();
+	const { i18n } = useTranslation();
 
 	const [open, setOpen] = useState<boolean>(false);
 
 	const onLanguageChange = (value: string) => {
 		i18n.changeLanguage(value);
-		Cookies.set("locale", value);
-	}
+		Cookies.set('locale', value);
+	};
 
 	return (
 		<DropdownMenu.Root open={open} onOpenChange={() => setOpen(!open)}>
@@ -34,10 +33,7 @@ export const LanguageMenu = () => {
 					sideOffset={3}
 					align="end"
 				>
-					<DropdownMenu.RadioGroup
-						value={i18n.language}
-						onValueChange={onLanguageChange}
-					>
+					<DropdownMenu.RadioGroup value={i18n.language} onValueChange={onLanguageChange}>
 						<DropdownMenu.RadioItem value="en">
 							<DropdownMenu.ItemIndicator>
 								<CircleFilledIcon />

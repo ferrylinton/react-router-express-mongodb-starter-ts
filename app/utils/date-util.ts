@@ -1,9 +1,9 @@
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
 export const formatToDate = (date?: Date) => {
-    if (date) {
-        return format(date, "yyyy-MM-dd");
-    } else {
-        return "-"
-    }
-}
+	if (date) {
+		return format(date, 'yyyy-MM-dd');
+	} else {
+		return '-';
+	}
+};

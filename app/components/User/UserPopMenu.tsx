@@ -13,7 +13,6 @@ type Props = {
 };
 
 export const UserPopMenu = (props: Props) => {
-
 	const { t } = useTranslation();
 
 	return (
@@ -34,15 +33,9 @@ export const UserPopMenu = (props: Props) => {
 						<button onClick={() => props.toggleLockUser()}>
 							{t(props.locked ? 'unlock' : 'lock')}
 						</button>
-						<button onClick={() => props.toDetail()}>
-							{t("detail")}
-						</button>
-						<button onClick={() => props.toUpdate()}>
-							{t("modify")}
-						</button>
-						<button onClick={() => props.toPassword()}>
-							{t("password")}
-						</button>
+						<button onClick={() => props.toDetail()}>{t('detail')}</button>
+						<button onClick={() => props.toUpdate()}>{t('modify')}</button>
+						<button onClick={() => props.toPassword()}>{t('password')}</button>
 					</section>
 
 					<Popover.Close className={styles['popover-close']} aria-label="Close">

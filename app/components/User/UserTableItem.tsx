@@ -1,4 +1,3 @@
-
 import { formatToDate } from '~/utils/date-util';
 import { Truncate } from '../Truncate/Truncate';
 
@@ -8,7 +7,6 @@ type Props = {
 };
 
 export const UserTableItem = ({ index, user }: Props) => {
-
 	return (
 		<>
 			<tr data-locked={user.locked}>
@@ -17,9 +15,7 @@ export const UserTableItem = ({ index, user }: Props) => {
 				<td>
 					<Truncate content={user.email} />
 				</td>
-				<td>
-					{formatToDate(user.createdAt)}
-				</td>
+				<td>{formatToDate(user.createdAt)}</td>
 			</tr>
 		</>
 	);

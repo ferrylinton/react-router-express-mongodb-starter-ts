@@ -1,12 +1,9 @@
-import { useTranslation } from "react-i18next";
-import { SearchForm } from "../SearchForm/SearchForm";
+import { useTranslation } from 'react-i18next';
+import { SearchForm } from '../SearchForm/SearchForm';
 import styles from '../../css/DataList.module.css';
-import { SkeletonSquare } from "../Skeleton/SkeletonSquare";
-
-
+import { SkeletonSquare } from '../Skeleton/SkeletonSquare';
 
 export const UserTableSkeleton = () => {
-
 	const { t } = useTranslation();
 
 	return (
@@ -17,18 +14,12 @@ export const UserTableSkeleton = () => {
 			<div className={styles['data-list']}>
 				<div table-type="data">
 					<table>
-					<thead>
+						<thead>
 							<tr>
 								<th>#</th>
-								<th>
-									{t("username")}
-								</th>
-								<th>
-									{t("email")}
-								</th>
-								<th>
-									{t("createdAt")}
-								</th>
+								<th>{t('username')}</th>
+								<th>{t('email')}</th>
+								<th>{t('createdAt')}</th>
 							</tr>
 						</thead>
 						<tbody>

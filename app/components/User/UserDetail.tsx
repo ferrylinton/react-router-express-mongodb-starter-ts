@@ -1,4 +1,3 @@
-
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSubmit } from 'react-router';
 import styles from '../../css/DataDetail.module.css';
@@ -10,7 +9,6 @@ type UserDetailProps = {
 };
 
 export const UserDetail = ({ user }: UserDetailProps) => {
-
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
 	const submit = useSubmit();
@@ -22,7 +20,10 @@ export const UserDetail = ({ user }: UserDetailProps) => {
 	const okHandler = async () => {
 		try {
 			if (user) {
-				submit({ id: user.id, username: user.username }, { method: "post", action: `/user/detail/${user.id}` })
+				submit(
+					{ id: user.id, username: user.username },
+					{ method: 'post', action: `/user/detail/${user.id}` }
+				);
 				hideConfirm();
 			}
 		} catch (error: any) {
@@ -37,9 +38,7 @@ export const UserDetail = ({ user }: UserDetailProps) => {
 	};
 
 	if (user === null) {
-		return (
-			<div>Not found</div>
-		)
+		return <div>Not found</div>;
 	} else {
 		return (
 			<>
@@ -47,27 +46,27 @@ export const UserDetail = ({ user }: UserDetailProps) => {
 					<table>
 						<tbody>
 							<tr>
-								<th> {t("id")}</th>
+								<th> {t('id')}</th>
 								<td>{user.id}</td>
 							</tr>
 							<tr>
-								<th>{t("email")}</th>
+								<th>{t('email')}</th>
 								<td>{user.email}</td>
 							</tr>
 							<tr>
-								<th>{t("username")}</th>
+								<th>{t('username')}</th>
 								<td>{user.username}</td>
 							</tr>
 							<tr>
-								<th>{t("locked")}</th>
-								<td>{t(user.locked ? "yes" : "no")}</td>
+								<th>{t('locked')}</th>
+								<td>{t(user.locked ? 'yes' : 'no')}</td>
 							</tr>
 							<tr>
-								<th>{t("createdAt")}</th>
+								<th>{t('createdAt')}</th>
 								<td>{user.createdAt.toDateString()}</td>
 							</tr>
 							<tr>
-								<th>{t("updatedAt")}</th>
+								<th>{t('updatedAt')}</th>
 								<td>{user.updatedAt ? user.updatedAt.toDateString() : '-'}</td>
 							</tr>
 						</tbody>
@@ -75,15 +74,13 @@ export const UserDetail = ({ user }: UserDetailProps) => {
 				</div>
 				<div className="flex gap-1 mt-3">
 					<Button minWidth={100} onClick={() => navigate('/user')}>
-						{t("back")}
+						{t('back')}
 					</Button>
 					<Button minWidth={100} variant="danger" onClick={onClickDelete}>
-						{t("delete")}
+						{t('delete')}
 					</Button>
 				</div>
 			</>
 		);
 	}
-
-
 };

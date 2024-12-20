@@ -14,21 +14,19 @@ import { getErrorsObject } from '~/validations/validation-util';
 import { Route } from '../+types/root';
 import styles from '~/components/Form/Form.module.css';
 
-
 type ActionData = {
-    errorMessage?: string
-    validationError?: ValidationError
-}
-
+	errorMessage?: string;
+	validationError?: ValidationError;
+};
 
 export const action = async ({ request }: Route.ActionArgs) => {
-    const t = await i18next.getFixedT(request);
-    const payload = Object.fromEntries(await request.formData());
-    const validation = ForgotPasswordSchema.safeParse(payload);
+	const t = await i18next.getFixedT(request);
+	const payload = Object.fromEntries(await request.formData());
+	const validation = ForgotPasswordSchema.safeParse(payload);
 
-    if (validation.success) {
-        try {
-            const { email } = validation.data;
+	if (validation.success) {
+		try {
+			const { email } = validation.data;
 			const user = await findUserByEmail(email);
 
 			if (user) {
@@ -36,74 +34,62 @@ export const action = async ({ request }: Route.ActionArgs) => {
 				const { insertedId: token } = await createPasswordToken(username);
 				const html = generateMail(`${HOST}/resetpassword?token=${token}`);
 				await sendMail(email, html);
-				return await toast(t("emailSent"), "/forgotpassword");
+				return await toast(t('emailSent'), '/forgotpassword');
 			} else {
 				return data({ errorMessage: t('emailNotFound') });
 			}
-        } catch (error: any) {
-            return data({ errorMessage: error.message });
-        }
-    } else {
-        return data({ validationError: getErrorsObject(validation.error), user: payload });
-    }
-    
-}
+		} catch (error: any) {
+			return data({ errorMessage: error.message });
+		}
+	} else {
+		return data({ validationError: getErrorsObject(validation.error), user: payload });
+	}
+};
 
 export default function ForgotPasswordRoute() {
-    const { t } = useTranslation();
+	const { t } = useTranslation();
 
-    const actionData = useActionData<ActionData>();
+	const actionData = useActionData<ActionData>();
 
-    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+	const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-    const [validationError, setValidationError] = useState<ValidationError | undefined>(undefined);
+	const [validationError, setValidationError] = useState<ValidationError | undefined>(undefined);
 
-    useEffect(() => {
+	useEffect(() => {
+		if (actionData?.validationError) {
+			setValidationError(actionData.validationError);
+			setErrorMessage(undefined);
+		}
 
-        if (actionData?.validationError) {
-            setValidationError(actionData.validationError);
-            setErrorMessage(undefined);
-        }
+		if (actionData?.errorMessage) {
+			setErrorMessage(actionData.errorMessage);
+			setValidationError(undefined);
+		}
+	}, [actionData]);
 
-        if (actionData?.errorMessage) {
-            setErrorMessage(actionData.errorMessage);
-            setValidationError(undefined);
-        }
-    }, [actionData]);
+	return (
+		<>
+			<div className="h-full flex justify-center items-center">
+				<Form method="post" noValidate autoComplete="off" className={styles['form']}>
+					{errorMessage && <p>{errorMessage}</p>}
 
-    return (
-        <>
-            <div className="h-full flex justify-center items-center">
-                <Form
-                    method="post"
-                    noValidate
-                    autoComplete="off"
-                    className={styles["form"]}
-                >
-                    {errorMessage && <p>{errorMessage}</p>}
+					<InputForm
+						type="text"
+						maxLength={50}
+						name="email"
+						validationError={validationError}
+					/>
 
-                    <InputForm
-                        type="text"
-                        maxLength={50}
-                        name="email"
-                        validationError={validationError}
-                    />
+					<Button type="submit" variant="primary" size="big">
+						{t('forgotPassword')}
+					</Button>
 
-                    <Button type="submit" variant="primary" size="big">
-                        {t("forgotPassword")}
-                    </Button>
-
-                    <div className="flex justify-between uppercase">
-                        <Link to="/register">
-                            {t("register")}
-                        </Link>
-                        <Link to="/login">
-                            {t("login")}
-                        </Link>
-                    </div>
-
-                </Form>
-            </div>
-        </>
-    );
+					<div className="flex justify-between uppercase">
+						<Link to="/register">{t('register')}</Link>
+						<Link to="/login">{t('login')}</Link>
+					</div>
+				</Form>
+			</div>
+		</>
+	);
 }

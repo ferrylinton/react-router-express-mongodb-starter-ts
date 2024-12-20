@@ -1,16 +1,13 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.vite.json" }
-  ],
-  "compilerOptions": {
-    "checkJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  }
+	"files": [],
+	"references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.vite.json" }],
+	"compilerOptions": {
+		"checkJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"plugins": [{ "name": "typescript-plugin-css-modules" }]
+	}
 }

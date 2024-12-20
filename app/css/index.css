@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
 	font-family: var(--body-font);
 	background-color: var(--body-bg);
@@ -27,8 +25,9 @@ button {
 	outline: none;
 }
 
-input:focus, button:focus {
-    outline: none;
+input:focus,
+button:focus {
+	outline: none;
 }
 
 /* Window's Scrollbar */
@@ -119,7 +118,6 @@ svg {
 	line-height: 50px;
 	font-size: 1.6rem;
 	padding: 0 1rem;
-	
 
 	& span:first-child {
 		color: #ffffff;
@@ -142,7 +140,7 @@ nav .logo {
 	}
 }
 
-pre.stack{
+pre.stack {
 	width: 100%;
 	overflow: auto;
 	padding: 1rem;

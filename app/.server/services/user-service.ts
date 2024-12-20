@@ -7,7 +7,6 @@ import { getSort, PAGE_SIZE } from '../utils/pager-util';
 import logger from '../config/winston';
 
 export const findUsers = async ({ page, keyword, sort }: RequestParams) => {
-	await new Promise(r => setTimeout(r, 2000));
 	sort = sort || 'createdAt,desc';
 	const userCollection = await getCollection<User>(USER_COLLECTION);
 
@@ -68,7 +67,7 @@ export const findUsers = async ({ page, keyword, sort }: RequestParams) => {
 			pageSize: PAGE_SIZE,
 		},
 		sort,
-		keyword
+		keyword,
 	};
 
 	if (arr.length) {

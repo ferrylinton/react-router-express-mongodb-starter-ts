@@ -1,4 +1,3 @@
-
 import clsx from 'clsx';
 import { Outlet } from 'react-router';
 import { AppProvider } from '../../providers/AppProvider';
@@ -10,7 +9,7 @@ export default function PublicLayout() {
 	return (
 		<AppProvider>
 			<ToastProvider>
-				<div className={clsx(styles.layout, 'flex-col',)}>
+				<div className={clsx(styles.layout, 'flex-col')}>
 					<PublicNavbar />
 					<Outlet />
 				</div>

@@ -1,8 +1,8 @@
-:global(.dark){
-	.data-detail{
+:global(.dark) {
+	.data-detail {
 		--table-bg: hsl(var(--base-h), var(--base-s), 25%);
 		--table-border: hsl(var(--base-h), var(--base-s), 35%);
-		--table-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
+		--table-shadow: hsla(var(--base-h), var(--base-s), 15%, 0.5);
 		--td-odd-even: hsl(var(--base-h), var(--base-s), 24%);
 		--th-bg: hsl(var(--base-h), var(--base-s), 22%);
 		--td-border: hsl(var(--base-h), var(--base-s), 30%);
@@ -12,11 +12,10 @@
 .data-detail {
 	--table-bg: hsl(var(--base-h), var(--base-s), 100%);
 	--table-border: hsl(var(--base-h), var(--base-s), 80%);
-	--table-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--table-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
 	--td-odd-even: hsl(var(--base-h), var(--base-s), 96%);
 	--th-bg: hsl(var(--base-h), var(--base-s), 85%);
 	--td-border: hsl(var(--base-h), var(--base-s), 90%);
-	
 
 	width: 100%;
 	border-radius: 0.3rem;
@@ -24,11 +23,10 @@
 	background-color: var(--table-bg);
 	border: solid 1px var(--table-border);
 	box-shadow: var(--table-shadow) 0px 0px 10px;
-	
 
 	& table {
 		width: 100%;
-		
+
 		& tr:not(:last-child) {
 			& th,
 			& td {

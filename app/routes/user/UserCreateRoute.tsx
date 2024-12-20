@@ -8,57 +8,47 @@ import i18next from '~/i18n/i18next.server';
 import { CreateUserSchema } from '~/validations/user-validation';
 import { getErrorsObject } from '~/validations/validation-util';
 
-export const loader = async ({request }: LoaderFunctionArgs) => {
-    await isAuthenticated(request, "/user/create");
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	await isAuthenticated(request, '/user/create');
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-    await new Promise(r => setTimeout(r, 2000));
-    const loggedUser = await isAuthenticated(request, "/user/create");
-    const t = await i18next.getFixedT(request);
-    const payload = Object.fromEntries(await request.formData());
-    const validation = CreateUserSchema.safeParse(payload);
+	const loggedUser = await isAuthenticated(request, '/user/create');
+	const t = await i18next.getFixedT(request);
+	const payload = Object.fromEntries(await request.formData());
+	const validation = CreateUserSchema.safeParse(payload);
 
-    if (validation.success) {
-        try {
-            const { passwordConfirm, ...input } = validation.data;
-            await createUser(input, loggedUser.username);
-            return await toast(t("dataIsSaved", { arg: validation.data.username }), "/user");
-
-        } catch (error: any) {
-            return data({ errorMessage: error.message });
-        }
-    } else {
-        return data({ validationError: getErrorsObject(validation.error), user: payload });
-    }
-}
+	if (validation.success) {
+		try {
+			const { passwordConfirm, ...input } = validation.data;
+			await createUser(input, loggedUser.username);
+			return await toast(t('dataIsSaved', { arg: validation.data.username }), '/user');
+		} catch (error: any) {
+			return data({ errorMessage: error.message });
+		}
+	} else {
+		return data({ validationError: getErrorsObject(validation.error), user: payload });
+	}
+};
 
 export default function UserCreateRoute() {
+	const actionData = useActionData<Partial<UserFormProps>>();
 
-    const actionData = useActionData<Partial<UserFormProps>>();
+	const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+	const [validationError, setValidationError] = useState<ValidationError | undefined>(undefined);
 
-    const [validationError, setValidationError] = useState<ValidationError | undefined>(undefined);
+	useEffect(() => {
+		if (actionData?.validationError) {
+			setValidationError(actionData.validationError);
+			setErrorMessage(undefined);
+		}
 
+		if (actionData?.errorMessage) {
+			setErrorMessage(actionData.errorMessage);
+			setValidationError(undefined);
+		}
+	}, [actionData]);
 
-    useEffect(() => {
-
-        if (actionData?.validationError) {
-            setValidationError(actionData.validationError);
-            setErrorMessage(undefined);
-        }
-
-        if (actionData?.errorMessage) {
-            setErrorMessage(actionData.errorMessage);
-            setValidationError(undefined);
-        }
-
-    }, [actionData]);
-
-    return (
-        <UserCreateForm 
-         errorMessage={errorMessage} 
-         validationError={validationError} />
-    )
+	return <UserCreateForm errorMessage={errorMessage} validationError={validationError} />;
 }

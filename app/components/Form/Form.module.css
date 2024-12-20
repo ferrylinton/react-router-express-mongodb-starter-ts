@@ -1,32 +1,32 @@
-:global(.dark){
-	.form{
+:global(.dark) {
+	.form {
 		--form-color: hsl(var(--base-h), var(--base-s), 65%);
-        --form-hover-color: hsl(var(--base-h), var(--base-s), 75%);
-        --form-border: hsl(var(--base-h), var(--base-s), 45%);
-        --form-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
-        --form-bg: hsl(var(--base-h), var(--base-s), 30%);
-        --form-disabled-bg: hsl(var(--base-h), var(--base-s), 85%);
+		--form-hover-color: hsl(var(--base-h), var(--base-s), 75%);
+		--form-border: hsl(var(--base-h), var(--base-s), 45%);
+		--form-shadow: hsla(var(--base-h), var(--base-s), 15%, 0.5);
+		--form-bg: hsl(var(--base-h), var(--base-s), 30%);
+		--form-disabled-bg: hsl(var(--base-h), var(--base-s), 85%);
 	}
 }
 
 .form {
 	--form-color: hsl(var(--base-h), var(--base-s), 65%);
-    --form-hover-color: hsl(var(--base-h), var(--base-s), 55%);
+	--form-hover-color: hsl(var(--base-h), var(--base-s), 55%);
 	--form-border: hsl(var(--base-h), var(--base-s), 80%);
-    --form-shadow : hsla(var(--base-h), var(--base-s), 70%, 0.5);
-    --form-bg: hsl(var(--base-h), var(--base-s), 100%);
-    --form-disabled-bg: hsl(var(--base-h), var(--base-s), 90%);
-	
-    width: 100%;
+	--form-shadow: hsla(var(--base-h), var(--base-s), 70%, 0.5);
+	--form-bg: hsl(var(--base-h), var(--base-s), 100%);
+	--form-disabled-bg: hsl(var(--base-h), var(--base-s), 90%);
+
+	width: 100%;
 	max-width: 350px;
 	border-radius: 5px;
 	padding: 2.7rem 1.5rem;
 	display: flex;
 	gap: 1.5rem;
 	flex-direction: column;
-    background-color: var(--form-bg);
+	background-color: var(--form-bg);
 	border: solid 1px var(--form-border);
-    box-shadow: var(--form-shadow) 0px 0px 10px;
+	box-shadow: var(--form-shadow) 0px 0px 10px;
 
 	& p {
 		text-align: center;
@@ -77,7 +77,7 @@
 		line-height: 1;
 		padding: 4px 4px 4px 12px;
 		border-bottom: solid 1px var(--form-border);
-	
+
 		&:not([readonly]):focus {
 			outline: none;
 			box-shadow: none;
@@ -85,14 +85,12 @@
 		}
 	}
 
-	&	input:read-only {
-			background-color: var(--form-disabled-bg);
-			color: var(--form-color);
-			cursor: not-allowed;
-		}
+	& input:read-only {
+		background-color: var(--form-disabled-bg);
+		color: var(--form-color);
+		cursor: not-allowed;
+	}
 }
-
-
 
 .form-group p {
 	color: var(--danger);
@@ -115,28 +113,28 @@
 	font-size: 0.9rem;
 	line-height: 1;
 	padding: 4px 4px 4px 12px;
-    color: var(--body-color);
+	color: var(--body-color);
 	border-bottom: solid 1px var(--form-border);
 	box-sizing: border-box;
 
-	& span:last-child{
-		color:  var(--form-color);
+	& span:last-child {
+		color: var(--form-color);
 	}
 }
 
-:global(.dark){
-	.select-content{
+:global(.dark) {
+	.select-content {
 		--form-border: hsl(var(--base-h), var(--base-s), 45%);
-        --form-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
-        --form-bg: hsl(var(--base-h), var(--base-s), 30%);
+		--form-shadow: hsla(var(--base-h), var(--base-s), 15%, 0.5);
+		--form-bg: hsl(var(--base-h), var(--base-s), 30%);
 		--form-hover-bg: hsl(var(--base-h), var(--base-s), 25%);
 	}
 }
 
 .select-content {
-    --form-border: hsl(var(--base-h), var(--base-s), 65%);
-    --form-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
-    --form-bg: hsl(var(--base-h), var(--base-s), 95%);
+	--form-border: hsl(var(--base-h), var(--base-s), 65%);
+	--form-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--form-bg: hsl(var(--base-h), var(--base-s), 95%);
 	--form-hover-bg: hsl(var(--base-h), var(--base-s), 90%);
 
 	width: 250px;

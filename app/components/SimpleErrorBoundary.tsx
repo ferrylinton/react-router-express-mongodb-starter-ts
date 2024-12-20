@@ -1,7 +1,6 @@
 import { isRouteErrorResponse, useAsyncError } from 'react-router';
 import { WarningIcon } from '~/icons/WarningIcon';
 
-
 export const SimpleErrorBoundary = () => {
 	const error = useAsyncError() as any;
 

@@ -12,13 +12,8 @@ export const InputForm = ({ name, validationError, ...otherProps }: InputFormPro
 
 	return (
 		<div className={styles['form-group']}>
-			<input
-				name={name}
-				placeholder={t(name )}
-				autoComplete="off"
-				{...otherProps}
-			/>
-			<label>{t(name )}</label>
+			<input name={name} placeholder={t(name)} autoComplete="off" {...otherProps} />
+			<label>{t(name)}</label>
 			{validationError?.[name] && <p>{t(validationError[name])}</p>}
 		</div>
 	);

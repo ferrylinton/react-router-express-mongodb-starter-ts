@@ -6,20 +6,24 @@ import { ToggleMenu } from '../ToggleMenu/ToggleMenu';
 import { CollapsibleMenuItem } from './CollapsibleMenuItem';
 import styles from './Sidebar.module.css';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 export const Sidebar = () => {
-
-	let { t } = useTranslation();
+	const { t } = useTranslation();
 
 	const navigate = useNavigate();
 
-	const submit = useSubmit()
+	const submit = useSubmit();
 
 	const { toggleSidebar, sidebarState } = useAppContext();
 
-
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
+	useEffect(() => {
+		if (sidebarState === 'open') {
+			toggleSidebar();
+		}
+	}, []);
 
 	const handleLink = (event: React.MouseEvent<HTMLAnchorElement>) => {
 		event.preventDefault();
@@ -28,17 +32,18 @@ export const Sidebar = () => {
 	};
 
 	const okHandler = async () => {
+		toggleSidebar();
 		hideConfirm();
-		submit(null, { method: "post", action: "/logout" })
+		submit(null, { method: 'post', action: '/logout' });
 	};
 
 	const onClickLogout = () => {
-		showConfirm("Logout?", okHandler);
+		showConfirm('Logout?', okHandler);
 	};
 
 	return (
 		<>
-			<aside role='navigation' className={styles['sidebar']} data-state={sidebarState}>
+			<aside role="navigation" className={styles['sidebar']} data-state={sidebarState}>
 				<div className={styles['sidebar-top']}>
 					<a className="logo" href="/">
 						<span>Simple</span>
@@ -49,14 +54,14 @@ export const Sidebar = () => {
 
 				<div className={styles['sidebar-menu']}>
 					<Link onClick={handleLink} to="/" className={styles['sidebar-link']}>
-						{t("home")}
+						{t('home')}
 					</Link>
 					<CollapsibleMenuItem label={'Profile'}>
 						<Link onClick={handleLink} to="/profile">
-							{t("profile")}
+							{t('profile')}
 						</Link>
 						<Link onClick={handleLink} to="/changepassword">
-							{t("changePassword")}
+							{t('changePassword')}
 						</Link>
 					</CollapsibleMenuItem>
 					<CollapsibleMenuItem label={'Todo'}>

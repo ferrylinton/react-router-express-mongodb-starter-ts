@@ -1,7 +1,8 @@
-:global(.dark){
-	.search-form{
+:global(.dark) {
+	.search-form {
 		--search-bg: hsl(var(--base-h), var(--base-s), 28%);
 		--search-border: hsl(var(--base-h), var(--base-s), 40%);
+		--search-shadow: hsla(var(--base-h), var(--base-s), 15%, 0.5);
 		--button-bg: hsl(var(--base-h), var(--base-s), 26%);
 		--button-color: hsl(var(--base-h), var(--base-s), 38%);
 	}
@@ -10,6 +11,7 @@
 .search-form {
 	--search-bg: hsl(var(--base-h), var(--base-s), 100%);
 	--search-border: hsl(var(--base-h), var(--base-s), 80%);
+	--search-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
 	--button-bg: hsl(var(--base-h), var(--base-s), 90%);
 	--button-color: hsl(var(--base-h), var(--base-s), 60%);
 
@@ -20,6 +22,7 @@
 	overflow: hidden;
 	border: solid 1px var(--search-border);
 	background-color: var(--search-bg);
+	box-shadow: var(--search-shadow) 0px 0px 10px;
 
 	&:focus-within {
 		border: solid 1px var(--primary);
@@ -51,12 +54,12 @@
 		background-color: var(--button-bg);
 		color: var(--button-color);
 
-		&:nth-of-type(1) svg{
+		&:nth-of-type(1) svg {
 			height: 1.4rem;
 			width: auto;
 		}
 
-		&:nth-of-type(2) svg{
+		&:nth-of-type(2) svg {
 			height: 1.4rem;
 			width: auto;
 		}

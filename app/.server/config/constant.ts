@@ -24,6 +24,7 @@ if (!process.env.MONGODB_DATABASE) {
 
 export const NODE_ENV = process.env.NODE_ENV || 'development';
 export const PORT = process.env.PORT || '5001';
+export const SET_TIMEOUT = parseInt(process.env.SET_TIMEOUT || '200');
 export const HOST = process.env.HOST || `localhost:${PORT}`;
 
 export const MONGODB_URL = process.env.MONGODB_URL;

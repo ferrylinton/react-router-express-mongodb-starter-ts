@@ -1,5 +1,5 @@
-:global(.dark){
-	.sidebar{
+:global(.dark) {
+	.sidebar {
 		--sidebar-bg: hsl(var(--base-h), var(--base-s), 23%);
 		--sidebar-hover: hsl(var(--base-h), var(--base-s), 35%);
 		--sidebar-text: hsl(var(--base-h), var(--base-s), 90%);
@@ -39,7 +39,7 @@
 	box-shadow: var(--sidebar-shadow);
 }
 
-.sidebar[data-state=open] {
+.sidebar[data-state='open'] {
 	visibility: visible;
 	opacity: 1;
 	transform: translateX(0);
@@ -66,7 +66,7 @@
 	z-index: 100;
 }
 
-.sidebar-overlay[data-state=open] {
+.sidebar-overlay[data-state='open'] {
 	display: block;
 }
 
@@ -129,7 +129,7 @@
 		}
 	}
 
-	.sidebar-overlay[data-state=open] {
+	.sidebar-overlay[data-state='open'] {
 		display: none;
 	}
 }

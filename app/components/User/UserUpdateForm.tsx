@@ -6,7 +6,6 @@ import { SelectRole } from '../Form/SelectRole';
 import { Checkbox } from '../Form/Checkbox';
 import styles from '~/components/Form/Form.module.css';
 
-
 export const UserUpdateForm = ({ user, validationError, errorMessage }: UserFormProps) => {
 	const { t } = useTranslation();
 
@@ -15,12 +14,7 @@ export const UserUpdateForm = ({ user, validationError, errorMessage }: UserForm
 	return (
 		<>
 			<div className="h-full flex justify-center items-center">
-				<Form
-					method="post"
-					noValidate
-					autoComplete="off"
-					className={styles["form"]}
-				>
+				<Form method="post" noValidate autoComplete="off" className={styles['form']}>
 					{errorMessage && <p>{errorMessage}</p>}
 
 					<InputForm
@@ -54,10 +48,10 @@ export const UserUpdateForm = ({ user, validationError, errorMessage }: UserForm
 							size="big"
 							onClick={() => navigate('/user', { replace: true })}
 						>
-							{t("back")}
+							{t('back')}
 						</Button>
 						<Button type="submit" variant="primary" size="big">
-							{t("update")}
+							{t('update')}
 						</Button>
 					</div>
 				</Form>

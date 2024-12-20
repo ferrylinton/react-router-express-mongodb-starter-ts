@@ -1,12 +1,7 @@
 import fs from 'fs';
 import nodemailer from 'nodemailer';
 import path from 'path';
-import {
-	MAIL_HOST,
-	MAIL_PASSWORD,
-	MAIL_PORT,
-	MAIL_USERNAME
-} from '../config/constant';
+import { MAIL_HOST, MAIL_PASSWORD, MAIL_PORT, MAIL_USERNAME } from '../config/constant';
 import logger from '../config/winston';
 
 let mailContent: string;
@@ -26,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 export const generateMail = (url: string) => {
 	if (!mailContent) {
-		const mailFile = path.join(process.cwd(), "templates", "mail.html");
+		const mailFile = path.join(process.cwd(), 'templates', 'mail.html');
 		mailContent = fs.readFileSync(mailFile, 'utf8');
 	}
 

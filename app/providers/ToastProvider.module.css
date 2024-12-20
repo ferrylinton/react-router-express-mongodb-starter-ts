@@ -16,7 +16,7 @@
 	outline: none;
 }
 
-.dark .ToastRoot{
+.dark .ToastRoot {
 	background-color: blue;
 }
 
@@ -32,7 +32,7 @@
 	column-gap: 15px;
 	align-items: start;
 
-	&[data-type=error] {
+	&[data-type='error'] {
 		color: var(--danger);
 	}
 

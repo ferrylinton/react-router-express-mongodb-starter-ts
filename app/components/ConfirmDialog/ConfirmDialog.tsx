@@ -5,7 +5,6 @@ import { Button } from '../Button/Button';
 import styles from './ConfirmDialog.module.css';
 
 export const ConfirmDialog = () => {
-
 	const { t } = useTranslation();
 	const { message, show, hideConfirm, okHandler } = useConfirmStore();
 
@@ -18,13 +17,11 @@ export const ConfirmDialog = () => {
 					<AlertDialog.Description>{message}</AlertDialog.Description>
 					<section>
 						<AlertDialog.Cancel asChild>
-							<Button variant="secondary">
-								{t("cancel")}
-							</Button>
+							<Button variant="secondary">{t('cancel')}</Button>
 						</AlertDialog.Cancel>
 						<AlertDialog.Action asChild>
 							<Button variant="primary" onClick={() => okHandler()}>
-								{t("ok")}
+								{t('ok')}
 							</Button>
 						</AlertDialog.Action>
 					</section>

@@ -1,13 +1,13 @@
-import { createRequestHandler } from "@react-router/express";
+import { createRequestHandler } from '@react-router/express';
 import cookieParser from 'cookie-parser';
-import express from "express";
-import "react-router";
-import { authMiddleware } from "./middlewares/auth-middleware";
+import express from 'express';
+import 'react-router';
+import { authMiddleware } from './middlewares/auth-middleware';
 
-declare module "react-router" {
-  interface AppLoadContext {
-    VALUE_FROM_EXPRESS: string;
-  }
+declare module 'react-router' {
+	interface AppLoadContext {
+		VALUE_FROM_EXPRESS: string;
+	}
 }
 
 export const app = express();
@@ -16,8 +16,8 @@ app.use(cookieParser());
 app.use(authMiddleware);
 
 app.use(
-  createRequestHandler({
-    // @ts-expect-error - virtual module provided by React Router at build time
-    build: () => import("virtual:react-router/server-build")
-  })
+	createRequestHandler({
+		// @ts-expect-error - virtual module provided by React Router at build time
+		build: () => import('virtual:react-router/server-build'),
+	})
 );

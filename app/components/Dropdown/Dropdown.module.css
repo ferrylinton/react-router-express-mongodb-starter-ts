@@ -17,12 +17,12 @@
 	}
 }
 
-:global(.dark){
-	.dropdown-menu-content{
+:global(.dark) {
+	.dropdown-menu-content {
 		--dropdown-bg: hsl(var(--base-h), var(--base-s), 28%);
 		--dropdown-hover-bg: hsl(var(--base-h), var(--base-s), 25%);
 		--dropdown-border: hsl(var(--base-h), var(--base-s), 40%);
-		--dropdown-shadow : hsla(var(--base-h), var(--base-s), 10%, 0.5);
+		--dropdown-shadow: hsla(var(--base-h), var(--base-s), 10%, 0.5);
 		--separator: hsl(var(--base-h), var(--base-s), 35%);
 	}
 }
@@ -31,7 +31,7 @@
 	--dropdown-bg: hsl(var(--base-h), var(--base-s), 95%);
 	--dropdown-hover-bg: hsl(var(--base-h), var(--base-s), 90%);
 	--dropdown-border: hsl(var(--base-h), var(--base-s), 80%);
-	--dropdown-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--dropdown-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
 	--separator: hsl(var(--base-h), var(--base-s), 85%);
 
 	min-width: 220px;

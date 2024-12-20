@@ -1,11 +1,11 @@
-:global(.dark){
-	.btn-secondary{
+:global(.dark) {
+	.btn-secondary {
 		--btn-border: hsl(var(--base-h), var(--base-s), 50%);
 		--btn-shadow: hsl(var(--base-h), var(--base-s), 25%);
 		--btn-bg: hsl(var(--base-h), var(--base-s), 40%);
 		--btn-color: hsl(var(--base-h), var(--base-s), 80%);
 		--btn-hover-bg: hsl(var(--base-h), var(--base-s), 35%);
-		--btn-hover-color: hsl(var(--base-h), var(--base-s), 90%);	
+		--btn-hover-color: hsl(var(--base-h), var(--base-s), 90%);
 	}
 
 	.btn-primary {
@@ -25,7 +25,7 @@
 	--btn-bg: hsl(var(--base-h), var(--base-s), 100%);
 	--btn-color: hsl(var(--base-h), var(--base-s), 50%);
 	--btn-hover-bg: hsl(var(--base-h), var(--base-s), 96%);
-	--btn-hover-color: hsl(var(--base-h), var(--base-s), 40%);	
+	--btn-hover-color: hsl(var(--base-h), var(--base-s), 40%);
 
 	display: flex;
 	justify-content: center;
@@ -41,7 +41,7 @@
 	background-color: var(--btn-bg);
 	box-shadow: var(--btn-shadow) 0 5px 10px -5px;
 
-	& svg[role=loader] {
+	& svg[role='loader'] {
 		height: 100%;
 		width: auto;
 	}
@@ -58,7 +58,7 @@
 	--btn-bg: hsl(var(--base-h), var(--base-s), 100%);
 	--btn-color: hsl(var(--base-h), var(--base-s), 50%);
 	--btn-hover-bg: hsl(var(--base-h), var(--base-s), 96%);
-	--btn-hover-color: hsl(var(--base-h), var(--base-s), 40%);	
+	--btn-hover-color: hsl(var(--base-h), var(--base-s), 40%);
 }
 
 .btn-primary {
@@ -69,7 +69,6 @@
 	--btn-hover-bg: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - 4%));
 	--btn-hover-color: var(--inverse-text);
 }
-
 
 .btn-danger {
 	--btn-border: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) - 5%));

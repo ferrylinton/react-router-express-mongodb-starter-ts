@@ -1,8 +1,8 @@
-:global(.dark){
-	.data-list{
+:global(.dark) {
+	.data-list {
 		--table-bg: hsl(var(--base-h), var(--base-s), 25%);
 		--table-border: hsl(var(--base-h), var(--base-s), 35%);
-		--table-shadow : hsla(var(--base-h), var(--base-s), 15%, 0.5);
+		--table-shadow: hsla(var(--base-h), var(--base-s), 15%, 0.5);
 		--td-odd-even: hsl(var(--base-h), var(--base-s), 24%);
 		--th-bg: hsl(var(--base-h), var(--base-s), 22%);
 		--td-border: hsl(var(--base-h), var(--base-s), 30%);
@@ -13,7 +13,7 @@
 .data-list {
 	--table-bg: hsl(var(--base-h), var(--base-s), 100%);
 	--table-border: hsl(var(--base-h), var(--base-s), 80%);
-	--table-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--table-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
 	--td-odd-even: hsl(var(--base-h), var(--base-s), 96%);
 	--th-bg: hsl(var(--base-h), var(--base-s), 80%);
 	--td-border: hsl(var(--base-h), var(--base-s), 90%);
@@ -99,7 +99,7 @@
 
 	& [table-type='action'] {
 		width: 45px;
-		
+
 		& table {
 			width: 100%;
 

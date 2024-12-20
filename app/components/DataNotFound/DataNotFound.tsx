@@ -1,14 +1,12 @@
-import { useTranslation } from "react-i18next";
-import styles from "./DataNotFound.module.css"
+import { useTranslation } from 'react-i18next';
+import styles from './DataNotFound.module.css';
 
 export const DataNotFound = () => {
+	const { t } = useTranslation();
 
-    const { t } = useTranslation();
-
-    return (
-        <div className={styles["data-not-found"]}>
-            <p>{t("dataIsNotFound")}</p>
-        </div>
-
-    )
-}
+	return (
+		<div className={styles['data-not-found']}>
+			<p>{t('dataIsNotFound')}</p>
+		</div>
+	);
+};

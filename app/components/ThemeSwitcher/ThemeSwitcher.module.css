@@ -22,7 +22,7 @@
 			will-change: transform;
 			background-color: currentColor;
 
-			&[data-state=checked] {
+			&[data-state='checked'] {
 				transform: translateX(15px);
 			}
 		}

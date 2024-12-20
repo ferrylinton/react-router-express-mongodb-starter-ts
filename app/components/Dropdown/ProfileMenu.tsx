@@ -13,18 +13,17 @@ export const ProfileMenu = () => {
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
-
 	const handleLink = (pathname: string) => {
 		console.log(pathname);
 	};
 
 	const okHandler = async () => {
 		hideConfirm();
-		submit(null, { method: "post", action: "/logout" })
+		submit(null, { method: 'post', action: '/logout' });
 	};
 
 	const onClickLogout = () => {
-		showConfirm("Logout?", okHandler);
+		showConfirm('Logout?', okHandler);
 	};
 
 	return (
@@ -48,9 +47,7 @@ export const ProfileMenu = () => {
 						ChangePassword
 					</DropdownMenu.Item>
 					<DropdownMenu.Separator />
-					<DropdownMenu.Item onClick={onClickLogout}>
-						Logout
-					</DropdownMenu.Item>
+					<DropdownMenu.Item onClick={onClickLogout}>Logout</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu.Portal>
 		</DropdownMenu.Root>

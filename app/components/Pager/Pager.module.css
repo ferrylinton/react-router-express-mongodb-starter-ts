@@ -1,5 +1,5 @@
-:global(.dark){
-	.pagination{
+:global(.dark) {
+	.pagination {
 		--pagination-color: hsl(var(--base-h), var(--base-s), 65%);
 		--pagination-disabled-color: hsl(var(--base-h), var(--base-s), 45%);
 		--pagination-hover-bg: hsl(var(--base-h), var(--base-s), 25%);
@@ -37,7 +37,6 @@
 		color: var(--pagination-color);
 
 		&:not(:has(svg)) {
-
 			&:not(.active):hover {
 				background-color: var(--pagination-hover-bg);
 			}

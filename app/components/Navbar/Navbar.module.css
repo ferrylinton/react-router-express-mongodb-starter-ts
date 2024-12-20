@@ -1,5 +1,5 @@
-:global(.dark){
-	.navbar{
+:global(.dark) {
+	.navbar {
 		--navbar-bg: hsl(var(--base-h), var(--base-s), 25%);
 		--navbar-border: hsl(var(--base-h), var(--base-s), 40%);
 	}

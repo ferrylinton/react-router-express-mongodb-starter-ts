@@ -1,4 +1,3 @@
-
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router';
 import { ReloadIcon } from '../../icons/ReloadIcon';

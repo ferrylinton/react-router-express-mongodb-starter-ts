@@ -4,7 +4,7 @@ import CloseIcon from '../icons/CloseIcon';
 import styles from './ToastProvider.module.css';
 
 export const ToastContext = createContext<ToastContextProps>({
-	toast: () => Function()
+	toast: () => Function(),
 });
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
@@ -12,7 +12,7 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 
 	const [toastData, setToastData] = useState<ToastData>();
 
-	const toast = (toastData : ToastData) => {
+	const toast = (toastData: ToastData) => {
 		setToastData(toastData);
 		setOpen(true);
 	};

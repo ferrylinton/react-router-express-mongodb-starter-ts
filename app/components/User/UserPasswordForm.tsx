@@ -5,7 +5,6 @@ import { InputForm } from '../Form/InputForm';
 import styles from '~/components/Form/Form.module.css';
 import { LoaderIcon } from '~/icons/LoaderIcon';
 
-
 export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFormProps) => {
 	const { t } = useTranslation();
 
@@ -13,7 +12,7 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 
 	const navigation = useNavigation();
 
-	const action = `/user/password/${user.id}`
+	const action = `/user/password/${user.id}`;
 
 	return (
 		<>
@@ -23,7 +22,7 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 					method="post"
 					noValidate
 					autoComplete="off"
-					className={styles["form"]}
+					className={styles['form']}
 				>
 					{errorMessage && <p>{errorMessage}</p>}
 
@@ -55,10 +54,10 @@ export const UserPasswordForm = ({ user, validationError, errorMessage }: UserFo
 							size="big"
 							onClick={() => navigate('/user', { replace: true })}
 						>
-							{t("back")}
+							{t('back')}
 						</Button>
 						<Button type="submit" variant="primary" size="big">
-							{navigation.formAction === action ? <LoaderIcon /> : t("update")}
+							{navigation.formAction === action ? <LoaderIcon /> : t('update')}
 						</Button>
 					</div>
 				</Form>

@@ -37,6 +37,6 @@ type KeyValue = {
 };
 
 type ErrorData = {
-	message?: string
-	arg?: string
-}
+	message?: string;
+	arg?: string;
+};

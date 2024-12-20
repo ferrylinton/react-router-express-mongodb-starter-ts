@@ -4,18 +4,18 @@
 	height: 25px;
 }
 
-:global(.dark){
-	.table-pop-menu{
+:global(.dark) {
+	.table-pop-menu {
 		--pop-menu-bg: hsl(var(--base-h), var(--base-s), 28%);
 		--pop-menu-border: hsl(var(--base-h), var(--base-s), 40%);
-		--pop-menu-shadow : hsla(var(--base-h), var(--base-s), 10%, 0.5);
+		--pop-menu-shadow: hsla(var(--base-h), var(--base-s), 10%, 0.5);
 	}
 }
 
 .table-pop-menu {
 	--pop-menu-bg: hsl(var(--base-h), var(--base-s), 95%);
 	--pop-menu-border: hsl(var(--base-h), var(--base-s), 80%);
-	--pop-menu-shadow : hsla(var(--base-h), var(--base-s), 80%, 0.5);
+	--pop-menu-shadow: hsla(var(--base-h), var(--base-s), 80%, 0.5);
 
 	position: relative;
 	border-radius: 4px;
@@ -67,7 +67,6 @@
 	right: 8px;
 	color: var(--pop-menu-border);
 }
-
 
 @keyframes slideUpAndFade {
 	from {

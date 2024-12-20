@@ -1,5 +1,5 @@
 type LoggedUser = {
-	id: string
-	username: string
-	role: Role
-}
+	id: string;
+	username: string;
+	role: Role;
+};

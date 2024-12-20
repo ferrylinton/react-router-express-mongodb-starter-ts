@@ -13,13 +13,11 @@ type UserTableProps = {
 };
 
 export const UserTable = ({ pageable }: UserTableProps) => {
-
 	const { t } = useTranslation();
 
 	const { showConfirm, hideConfirm } = useConfirmStore();
 
 	const submit = useSubmit();
-
 
 	const navigate = useNavigate();
 
@@ -38,7 +36,10 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 	const okHandler = async (user: Omit<User, 'password'>) => {
 		try {
 			if (user) {
-				submit({ username: user.username, locked: !user.locked }, { method: "post", action: `/user/lock/${user.id}` })
+				submit(
+					{ username: user.username, locked: !user.locked },
+					{ method: 'post', action: `/user/lock/${user.id}` }
+				);
 				hideConfirm();
 			}
 		} catch (error: any) {
@@ -47,16 +48,12 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 	};
 
 	const toggleLockUser = (user: Omit<User, 'password'>) => {
-		showConfirm(
-			t(
-				user.locked ? 'unlockUser' : 'lockUser',
-				{ username: user.username }
-			),
-			() => okHandler(user)
+		showConfirm(t(user.locked ? 'unlockUser' : 'lockUser', { username: user.username }), () =>
+			okHandler(user)
 		);
 	};
 
-	if(pageable){
+	if (pageable) {
 		return (
 			<>
 				<div className="mt-8 mb-4">
@@ -68,24 +65,16 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>
-										{t("username")}
-									</th>
-									<th>
-										{t("email")}
-									</th>
-									<th>
-										{t("createdAt")}
-									</th>
+									<th>{t('username')}</th>
+									<th>{t('email')}</th>
+									<th>{t('createdAt')}</th>
 								</tr>
 							</thead>
 							<tbody>
 								{pageable.pagination.total === 0 && (
 									<tr>
 										<td colSpan={4}>
-											<div className="no-records">
-												{t("noRecords")}
-											</div>
+											<div className="no-records">{t('noRecords')}</div>
 										</td>
 									</tr>
 								)}
@@ -94,7 +83,8 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 										<UserTableItem
 											key={index}
 											index={
-												pageable.pagination.page * pageable.pagination.pageSize +
+												pageable.pagination.page *
+													pageable.pagination.pageSize +
 												index +
 												1
 											}
@@ -136,5 +126,4 @@ export const UserTable = ({ pageable }: UserTableProps) => {
 			</>
 		);
 	}
-	
 };

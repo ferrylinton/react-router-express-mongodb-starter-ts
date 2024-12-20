@@ -1,14 +1,14 @@
-:global(.dark){
-	.toggle-menu{
+:global(.dark) {
+	.toggle-menu {
 		--color: hsl(var(--base-h), var(--base-s), 80%);
 	}
 }
 
-aside[role=navigation] .toggle-menu{
+aside[role='navigation'] .toggle-menu {
 	--color: hsl(var(--base-h), var(--base-s), 80%);
 }
 
-.toggle-menu{
+.toggle-menu {
 	--color: hsl(var(--base-h), var(--base-s), 40%);
 }
 
@@ -39,22 +39,20 @@ aside[role=navigation] .toggle-menu{
 	}
 }
 
-.toggle-menu[data-state=open] span:nth-child(1) {
+.toggle-menu[data-state='open'] span:nth-child(1) {
 	transform: translateY(9px) rotate(45deg);
 }
 
-.toggle-menu[data-state=open] span:nth-child(2) {
+.toggle-menu[data-state='open'] span:nth-child(2) {
 	opacity: 0;
 }
 
-.toggle-menu[data-state=open] span:nth-child(3) {
+.toggle-menu[data-state='open'] span:nth-child(3) {
 	transform: translateY(-10px) rotate(-45deg);
 }
 
 @media (min-width: 768px) {
-
 	.toggle-menu {
 		display: none;
 	}
-	
 }

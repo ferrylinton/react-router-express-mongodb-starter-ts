@@ -1,5 +1,5 @@
-:global(.dark){
-	.card{
+:global(.dark) {
+	.card {
 		--card-border-color: hsl(var(--base-h), var(--base-s), 45%);
 		--card-bg: hsl(var(--base-h), var(--base-s), 30%);
 	}
