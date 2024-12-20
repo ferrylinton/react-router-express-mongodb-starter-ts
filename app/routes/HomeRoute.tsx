@@ -3,7 +3,7 @@ import { data } from 'react-router';
 import { isAuthenticated } from '~/.server/utils/auth-util';
 import { Route } from '../+types/root';
 
-export function meta() {
+export function meta({}: Route.MetaArgs) {
 	return [
 		{ title: 'New React Router App' },
 		{ name: 'description', content: 'Welcome to React Router!' },
