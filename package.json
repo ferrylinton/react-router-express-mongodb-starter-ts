@@ -11,7 +11,7 @@
 		"typecheck": "react-router typegen && tsc --build --noEmit",
 		"lint": "eslint --fix .",
 		"format": "prettier . --write",
-		"prepare": "husky"
+		"prepare": "husky && husky install"
 	},
 	"husky": {
 		"hooks": {
@@ -84,7 +84,7 @@
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
 		"globals": "^15.14.0",
-		"husky": "^9.1.7",
+		"husky": "^8.0.0",
 		"lint-staged": "^15.2.11",
 		"nodemon": "^3.1.7",
 		"postcss": "^8.4.49",

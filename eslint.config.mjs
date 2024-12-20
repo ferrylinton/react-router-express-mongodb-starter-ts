@@ -7,7 +7,7 @@ export default [
 		files: ['**/*.{js,mjs,cjs,ts}'],
 	},
 	{
-		ignores: ['build', ".react-router", 'jest.config.js', 'webpack.config.server.js'],
+		ignores: ['build', '.react-router', 'jest.config.js', 'webpack.config.server.js'],
 	},
 	{
 		languageOptions: { globals: globals.browser },
